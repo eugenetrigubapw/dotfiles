@@ -1,0 +1,11 @@
+---
+- name: Include dotfiles
+  include_vars: vars/dotfiles.yaml
+
+- name: Link shared dotfiles
+  file:
+    src: "{{ item.value.src }}"
+    dest: "{{ item.value.dest }}"
+    state: link
+  with_dict: "{{dotfiles}}"
+

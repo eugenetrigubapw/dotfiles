@@ -1,0 +1,46 @@
+---
+- name: Playbook to manage personal dotfiles
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create folders
+      file:
+        path: "{{item}}"
+        state: directory
+      loop:
+        - "$HOME/.config/i3"
+        - "$HOME/.config/alacritty"
+        - "$HOME/.config/nvim/autoload"
+        - "$HOME/src"
+        - "$HOME/bin"
+
+    - include_tasks: tasks/link_dotfiles.yaml
+      tags:
+        - links
+
+    - include_tasks: tasks/packages.yaml
+      tags:
+        - packages
+
+    - include_tasks: tasks/desktop.yaml
+      tags:
+        - desktop
+
+    - name: Ensure shell is set to zsh
+      vars:
+        current_user: "{{ ansible_user_id }}"
+      become: yes
+      become_method: su
+      user:
+        name: "{{ current_user }}"
+        shell: /usr/local/bin/zsh
+
+    - name: Install vim-plug
+      command: >
+        wget \
+          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
+          -P "$HOME/.config/nvim/autoload"
+
+    - name: Install vim-plug plugins
+      shell: nvim +PlugInstall +qall --headless
+

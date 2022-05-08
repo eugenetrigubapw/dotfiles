@@ -1,0 +1,15 @@
+---
+user_desktop_files:
+  xinitrc:
+    src: "{{playbook_dir}}/../configs/desktop/home/.xinitrc"
+    dest: "{{ lookup('env', 'HOME') }}/.xinitrc"
+
+system_desktop_files:
+  etc-rc:
+    src: "{{playbook_dir}}/../configs/desktop/etc/rc.conf"
+    dest: "/etc/rc.conf"
+
+  boot-loader:
+    src: "{{playbook_dir}}/../configs/desktop/boot/loader.conf"
+    dest: "/boot/loader.conf"
+

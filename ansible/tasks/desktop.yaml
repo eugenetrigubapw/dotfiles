@@ -1,0 +1,24 @@
+---
+- name: Include desktop files
+  include_vars: vars/desktop.yaml
+
+- name: Link user files
+  file:
+    src: "{{ item.value.src }}"
+    dest: "{{ item.value.dest }}"
+    state: link
+  with_dict: "{{user_desktop_files}}"
+
+
+- name: Link system files
+  become: true
+  become_method: su
+  copy:
+    src: "{{ item.value.src }}"
+    dest: "{{ item.value.dest }}"
+    backup: yes
+    owner: root
+    group: wheel
+    mode: u=rw,g=r,o=r
+  with_dict: "{{system_desktop_files}}"
+

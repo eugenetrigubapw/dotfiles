@@ -1,0 +1,42 @@
+---
+pkg:
+  1password-client2:
+  audio/virtual_oss:
+  alacritty:
+  brlaser:
+  devcpu-data:
+  devel/xdg-user-dirs:
+  dmenu:
+  drm-kmod:
+  editors/vim:
+  editors/vscode:
+  en-freebsd-doc:
+  feh:
+  firefox:
+  fzf:
+  git:
+  go:
+  hack-font:
+  i3-gaps:
+  i3lock:
+  i3status:
+  jq:
+  neovim:
+  openssl:
+  pfetch:
+  pkg:
+  poudriere:
+  editors/py-pynvim:
+  python:
+  redshift:
+  ripgrep:
+  rsync:
+  rust-analyzer:
+  scrot:
+  spotify-tui:
+  spotifyd:
+  wget:
+  x11/xclip:
+  x11/xorg:
+  zsh:
+
