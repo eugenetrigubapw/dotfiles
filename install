@@ -1,5 +1,5 @@
 #!/bin/sh
-#set -e
+set -e
 
 repo_dir=$(realpath $(dirname "$0"))
 
