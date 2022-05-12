@@ -1,7 +1,6 @@
 [user]
 	name = Eugene Triguba
 	email = eugenetriguba@gmail.com
-	signingkey = 36403459D7521702
 [core]
 	editor = vim
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -16,5 +15,3 @@
 	colorMoved = zebra
 [init]
     defaultBranch = main
-[commit]
-	gpgsign = true
