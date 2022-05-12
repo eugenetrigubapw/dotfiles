@@ -1,14 +1,15 @@
 ---
-- name: Include desktop files
-  include_vars: vars/desktop.yaml
-
 - name: Link user files
   file:
     src: "{{ item.value.src }}"
     dest: "{{ item.value.dest }}"
     state: link
   with_dict: "{{user_desktop_files}}"
-
+  vars:
+    user_desktop_files:
+      xinitrc:
+        src: "{{playbook_dir}}/../configs/desktop/home/.xinitrc"
+        dest: "{{ lookup('env', 'HOME') }}/.xinitrc"
 
 - name: Link system files
   become: true
@@ -21,4 +22,12 @@
     group: wheel
     mode: u=rw,g=r,o=r
   with_dict: "{{system_desktop_files}}"
+  vars:
+    system_desktop_files:
+      etc-rc:
+        src: "{{playbook_dir}}/../configs/desktop/etc/rc.conf"
+        dest: "/etc/rc.conf"
 
+      boot-loader:
+        src: "{{playbook_dir}}/../configs/desktop/boot/loader.conf"
+        dest: "/boot/loader.conf"

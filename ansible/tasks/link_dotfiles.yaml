@@ -1,11 +1,32 @@
 ---
-- name: Include dotfiles
-  include_vars: vars/dotfiles.yaml
-
 - name: Link shared dotfiles
   file:
     src: "{{ item.value.src }}"
     dest: "{{ item.value.dest }}"
     state: link
   with_dict: "{{dotfiles}}"
+  vars:
+    dotfiles:
+      zshrc:
+        src: "{{playbook_dir}}/../configs/shared/.zshrc"
+        dest: "{{ lookup('env', 'HOME') }}/.zshrc"
 
+      gitconfig:
+        src: "{{playbook_dir}}/../configs/shared/.gitconfig"
+        dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
+
+      gdbinit:
+        src: "{{playbook_dir}}/../configs/shared/.gdbinit"
+        dest: "{{ lookup('env', 'HOME') }}/.gdbinit"
+
+      vimrc:
+        src: "{{playbook_dir}}/../configs/shared/.vimrc"
+        dest: "{{ lookup('env', 'HOME') }}/.config/nvim/init.vim"
+
+      tmux:
+        src: "{{playbook_dir}}/../configs/shared/.tmux.conf"
+        dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
+
+      alacritty:
+        src: "{{playbook_dir}}/../configs/shared/alacritty.yml"
+        dest: "{{ lookup('env', 'HOME') }}/.config/alacritty/alacritty.yml"

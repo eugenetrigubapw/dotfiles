@@ -15,31 +15,28 @@
         - "$HOME/bin"
 
     - include_tasks: tasks/link_dotfiles.yaml
-      tags:
-        - links
 
-    - include_tasks: tasks/packages.yaml
-      tags:
-        - packages
+    - include_tasks: tasks/dnf_packages.yaml
+      when: ansible_os_family == "RedHat"
+
+    - include_tasks: tasks/pkg_packages.yaml
+      when: ansible_os_family == "FreeBSD"
 
     - include_tasks: tasks/desktop.yaml
-      tags:
-        - desktop
+      when: ansible_os_family == "FreeBSD"
 
     - name: Ensure shell is set to zsh
       vars:
         current_user: "{{ ansible_user_id }}"
       become: yes
-      become_method: su
       user:
         name: "{{ current_user }}"
         shell: /usr/local/bin/zsh
 
     - name: Install vim-plug
-      command: >
-        wget \
-          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
-          -P "$HOME/.config/nvim/autoload"
+      get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: "$HOME/.config/nvim/autoload/plug.vim"
 
     - name: Install vim-plug plugins
       shell: nvim +PlugInstall +qall --headless

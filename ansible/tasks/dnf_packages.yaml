@@ -1,0 +1,54 @@
+---
+- name: Import 1Password key
+  become: yes
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://downloads.1password.com/linux/keys/1password.asc
+
+- name: Add 1Password YUM Repo
+  become: yes
+  yum_repository:
+    name: 1password
+    description: 1Password Stable Channel
+    baseurl: https://downloads.1password.com/linux/rpm/stable/$basearch
+    enabled: yes
+    gpgcheck: yes
+    repo_gpgcheck: yes
+    gpgkey: https://downloads.1password.com/linux/keys/1password.asc
+    state: present
+
+- name: Install dnf packages
+  become: yes
+
+  dnf:
+    name: "{{ item.key }}"
+    state: "{{ item.value.state | default('present') }}"
+
+  with_dict: "{{dnf}}"
+  vars:
+    dnf:
+      "@Development tools":
+      1password:
+      alacritty:
+      dmenu:
+      vim:
+      feh:
+      firefox:
+      fzf:
+      git:
+      go:
+      hack-fonts:
+      i3-gaps:
+      i3lock:
+      i3status:
+      jq:
+      neofetch:
+      neovim:
+      openssl:
+      python:
+      redshift:
+      ripgrep:
+      rsync:
+      scrot:
+      wget:
+      zsh:
