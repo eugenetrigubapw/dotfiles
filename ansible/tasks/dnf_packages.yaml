@@ -30,6 +30,7 @@
       "@Development tools":
       1password:
       alacritty:
+      cmake:
       dmenu:
       vim:
       feh:
@@ -46,6 +47,8 @@
       neovim:
       openssl:
       python:
+      python-devel:
+      python-neovim:
       redshift:
       ripgrep:
       rsync:
