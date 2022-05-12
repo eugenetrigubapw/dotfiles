@@ -1,11 +1,11 @@
 autoload -Uz vcs_info
 zstyle ":vcs_info:*" enable git svn
-zstyle ":vcs_info:git*" formats "- (%b) "
+zstyle ':vcs_info:git:*' formats '%F{green}(%b)%f '
 precmd() {
     vcs_info
 }
 setopt prompt_subst
-prompt="%2/ ${vcs_info_msg_0_}> "
+PROMPT=' %~ ${vcs_info_msg_0_}%# '
 
 export EDITOR="nvim"
 export BROWSER="firefox"
