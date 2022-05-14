@@ -1,7 +1,3 @@
-" Syntax highlighting
-colorscheme pablo
-syntax on
-
 " Flash screen instead of beep sound
 set visualbell
 
@@ -41,12 +37,43 @@ set backspace=indent,eol,start
 
 call plug#begin("$HOME/.config/nvim/plugged")
 
+" Auto complete
 Plug 'Valloric/YouCompleteMe'
+
+" Fuzzy finder
 Plug 'junegunn/fzf'
 
+" Git gutter
 Plug 'airblade/vim-gitgutter'
+
+" Status bar
+Plug 'vim-airline/vim-airline'
+
+" Git wrapper with :G
 Plug 'tpope/vim-fugitive'
 
+" Editorconfig file support
 Plug 'editorconfig/editorconfig-vim'
 
+" Theme
+Plug 'sainnhe/everforest'
+
 call plug#end()
+
+if has('termguicolors')
+  set termguicolors
+endif
+
+set background=dark
+
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:everforest_background = 'soft'
+let g:everforest_better_performance = 1
+let g:everforest_disable_italic_comment = 1
+syntax on
+colorscheme everforest
+
+let g:airline_theme = 'everforest'
+

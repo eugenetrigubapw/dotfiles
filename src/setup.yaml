@@ -8,13 +8,10 @@
         path: "{{item}}"
         state: directory
       loop:
-        - "$HOME/.config/i3"
-        - "$HOME/.config/alacritty"
-        - "$HOME/.config/nvim/autoload"
         - "$HOME/src"
         - "$HOME/bin"
 
-    - include_tasks: tasks/link_dotfiles.yaml
+    - include_tasks: tasks/shared_dotfiles.yaml
 
     - include_tasks: tasks/dnf_packages.yaml
       when: ansible_os_family == "RedHat"
@@ -29,6 +26,7 @@
       vars:
         current_user: "{{ ansible_user_id }}"
       become: yes
+      become_method: su
       user:
         name: "{{ current_user }}"
         shell: /usr/local/bin/zsh
@@ -40,4 +38,3 @@
 
     - name: Install vim-plug plugins
       shell: nvim +PlugInstall +qall --headless
-

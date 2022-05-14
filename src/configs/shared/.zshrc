@@ -11,6 +11,8 @@ export EDITOR="nvim"
 export BROWSER="firefox"
 export PAGER="less"
 
+export GPG_TTY=$(tty)
+
 export SRC_DIR="$HOME/src"
 export BIN_DIR="$HOME/bin"
 

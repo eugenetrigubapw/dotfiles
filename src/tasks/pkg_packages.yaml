@@ -11,21 +11,18 @@
   vars:
     pkg:
       1password-client2:
-      audio/virtual_oss:
       alacritty:
       brlaser:
       cmake:
       devcpu-data:
-      devel/xdg-user-dirs:
-      dmenu:
       drm-kmod:
-      editors/vim:
-      editors/vscode:
+      editors/py-pynvim:
       en-freebsd-doc:
       feh:
       firefox:
       fzf:
       git:
+      gnupg:
       go:
       hack-font:
       i3-gaps:
@@ -37,16 +34,21 @@
       pfetch:
       pkg:
       poudriere:
-      editors/py-pynvim:
       python:
       redshift:
       ripgrep:
+      rofi:
       rsync:
       rust-analyzer:
       scrot:
       spotify-tui:
       spotifyd:
+      sysutils/ansible:
+      vim:
+      virtual_oss:
+      vscode:
       wget:
-      x11/xclip:
-      x11/xorg:
+      xclip:
+      xdg-user-dirs:
+      xorg:
       zsh:

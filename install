@@ -37,5 +37,4 @@ if ! [ -x "$(command -v ansible-playbook)" ]; then
 fi
 
 export ANSIBLE_LOCALHOST_WARNING=false
-ansible-playbook --ask-become-pass "$repo_dir/ansible/setup.yaml"
-
+ansible-playbook --ask-become-pass "$repo_dir/src/setup.yaml"
