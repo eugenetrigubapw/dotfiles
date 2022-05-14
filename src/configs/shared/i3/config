@@ -13,9 +13,6 @@
 # is used in the bar {} block below.
 font pango:Hack 16
 
-#default_border pixel 1
-#default_floating_border pixel 1
-
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
@@ -40,10 +37,10 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
-set $up l
-set $down k
-set $left j
-set $right semicolon
+set $up k
+set $down j
+set $left h
+set $right l
 
 # use Mouse+Mod1 to drag floating windows to their wanted position
 floating_modifier Mod1
@@ -82,7 +79,7 @@ bindsym Mod1+Shift+Up move up
 bindsym Mod1+Shift+Right move right
 
 # split in horizontal orientation
-bindsym Mod1+h split h
+bindsym Mod1+Shift+v split h
 
 # split in vertical orientation
 bindsym Mod1+v split v
@@ -192,3 +189,11 @@ bar {
 }
 
 exec --no-startup-id redshift -l 43.547302:-96.728333 -g 0.9
+exec --no-startup-id feh --bg-scale $HOME/Pictures/wallpaper.jpg
+
+for_window [class=".*"] border pixel 0
+gaps inner 20
+gaps outer 10
+smart_gaps on
+smart_borders on
+

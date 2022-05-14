@@ -10,6 +10,13 @@
       loop:
         - "$HOME/src"
         - "$HOME/bin"
+        - "$HOME/Pictures"
+
+    - name: Link wallpaper
+      file:
+        src: "{{ playbook_dir }}/wallpaper.jpg"
+        dest: "$HOME/Pictures/wallpaper.jpg"
+        state: link
 
     - include_tasks: tasks/shared_dotfiles.yaml
 
