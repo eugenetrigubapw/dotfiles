@@ -34,14 +34,13 @@ set backspace=indent,eol,start
 " eol     allow backspacing over line breaks (join lines)
 " start   allow backspacing over the start of insert; CTRL-W and CTRL-U
 "         stop once at the start of insert.
-
 call plug#begin("$HOME/.config/nvim/plugged")
 
 " Auto complete
 Plug 'Valloric/YouCompleteMe'
 
 " Fuzzy finder
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Git gutter
 Plug 'airblade/vim-gitgutter'
@@ -58,6 +57,9 @@ Plug 'editorconfig/editorconfig-vim'
 " Theme
 Plug 'sainnhe/everforest'
 
+" Terraform
+Plug 'hashivim/vim-terraform'
+
 call plug#end()
 
 if has('termguicolors')
@@ -66,14 +68,11 @@ endif
 
 set background=dark
 
-" Set contrast.
-" This configuration option should be placed before `colorscheme everforest`.
-" Available values: 'hard', 'medium'(default), 'soft'
 let g:everforest_background = 'soft'
 let g:everforest_better_performance = 1
 let g:everforest_disable_italic_comment = 1
+let g:airline_theme = 'everforest'
+
 syntax on
 colorscheme everforest
-
-let g:airline_theme = 'everforest'
 

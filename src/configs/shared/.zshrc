@@ -5,7 +5,8 @@ precmd() {
     vcs_info
 }
 setopt prompt_subst
-PROMPT=' %~ ${vcs_info_msg_0_}%# '
+NEWLINE=$'\n'
+PROMPT=' %2~ ${vcs_info_msg_0_}%# '
 
 export EDITOR="nvim"
 export BROWSER="firefox"
@@ -73,3 +74,6 @@ gocover() {
     go test -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
 }
 
+ip() {
+    ifconfig | jc --ifconfig | jq '.[] | select(.name=="em0") | {ipv4_addr, ipv6_addr}'
+}

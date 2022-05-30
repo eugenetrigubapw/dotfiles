@@ -30,8 +30,8 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id mixer vol +10 && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id mixer vol -10 && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -188,12 +188,27 @@ bar {
         status_command i3status
 }
 
-exec --no-startup-id redshift -l 43.547302:-96.728333 -g 0.9
+exec --no-startup-id redshift -l 43.547302:-96.728333 -m randr -t 6500:3500
 exec --no-startup-id feh --bg-scale $HOME/Pictures/wallpaper.jpg
+exec --no-startup-id spotifyd
 
 for_window [class=".*"] border pixel 0
 gaps inner 20
 gaps outer 10
-smart_gaps on
+#smart_gaps on
 smart_borders on
 
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+#bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+#bindsym XF86AudioPlay exec playerctl play
+#bindsym XF86AudioPause exec playerctl pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous

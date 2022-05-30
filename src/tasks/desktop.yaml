@@ -46,6 +46,11 @@
         src: "{{playbook_dir}}/configs/desktop/etc/rc.conf"
         dest: "/etc/rc.conf"
 
+      etc-devfs:
+        src: "{{playbook_dir}}/configs/desktop/etc/devfs.rules"
+        dest: "/etc/devfs.rules"
+
       boot-loader:
         src: "{{playbook_dir}}/configs/desktop/boot/loader.conf"
         dest: "/boot/loader.conf"
+

@@ -18,6 +18,7 @@
       drm-kmod:
       editors/py-pynvim:
       en-freebsd-doc:
+      emulators/virtualbox-ose:
       feh:
       firefox:
       fzf:
@@ -44,6 +45,8 @@
       spotify-tui:
       spotifyd:
       sysutils/ansible:
+      sysutils/vagrant:
+      textproc/py-jc:
       vim:
       virtual_oss:
       vscode:

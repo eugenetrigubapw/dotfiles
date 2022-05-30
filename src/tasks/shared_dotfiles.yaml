@@ -42,3 +42,8 @@
       i3:
         src: "{{playbook_dir}}/configs/shared/i3"
         dest: "{{ lookup('env', 'HOME') }}/.config/i3"
+
+      i3status:
+        src: "{{playbook_dir}}/configs/shared/i3status"
+        dest: "{{ lookup('env', 'HOME') }}/.config/i3status"
+

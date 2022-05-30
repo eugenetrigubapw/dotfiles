@@ -29,6 +29,17 @@
     - include_tasks: tasks/desktop.yaml
       when: ansible_os_family == "FreeBSD"
 
+    - name: Ensure user is setup correctly
+      become: yes
+      become_method: su
+      ansible.builtin.user:
+        name: eugene
+        groups: wheel,vboxusers,operator
+        state: present
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        ssh_key_file: $HOME/.ssh/id_rsa
+
     - name: Ensure shell is set to zsh
       vars:
         current_user: "{{ ansible_user_id }}"
