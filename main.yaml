@@ -1,0 +1,12 @@
+---
+- name: Playbook to manage personal dotfiles
+  hosts: localhost
+  connection: local
+  roles:
+    - user
+    - zsh
+    - fonts
+    - 1password
+    - pyenv
+    - vim
+    - vscode

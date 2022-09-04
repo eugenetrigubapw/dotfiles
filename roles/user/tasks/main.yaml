@@ -1,0 +1,43 @@
+---
+- name: Link dotfiles
+  file:
+    src: "{{ item.value.src }}"
+    dest: "{{ item.value.dest }}"
+    state: link
+  with_dict: "{{dotfiles}}"
+  vars:
+    dotfiles:
+      gitconfig:
+        src: "{{ role_path }}/files/.gitconfig"
+        dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
+      gdbinit:
+        src: "{{ role_path }}/files/.gdbinit"
+        dest: "{{ lookup('env', 'HOME') }}/.gdbinit"
+      tmux:
+        src: "{{ role_path }}/files/.tmux.conf"
+        dest: "{{ lookup('env', 'HOME') }}/.tmux.conf"
+
+- name: Link wallpaper
+  file:
+    src: "{{ role_path }}/files/wallpaper.jpg"
+    dest: "$HOME/Pictures/wallpaper.jpg"
+    state: link
+
+- name: Install general packages
+  become: yes
+
+  dnf:
+    name: "{{ item.key }}"
+    state: "{{ item.value.state | default('present') }}"
+
+  with_dict: "{{dnf}}"
+  vars:
+    dnf:
+      "@Development tools":
+      curl:
+      firefox:
+      git:
+      openssl:
+      ripgrep:
+      rsync:
+      wget:

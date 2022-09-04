@@ -1,0 +1,46 @@
+---
+- name: Install build requirements
+  become: yes
+
+  dnf:
+    name: "{{ item.key }}"
+    state: "{{ item.value.state | default('present') }}"
+
+  with_dict: "{{dnf}}"
+  vars:
+    dnf:
+      make:
+      gcc:
+      zlib-devel:
+      bzip2:
+      bzip2-devel:
+      readline-devel:
+      sqlite:
+      sqlite-devel:
+      openssl-devel:
+      tk-devel:
+      libffi-devel:
+      xz-devel:
+
+- name: Download
+  ansible.builtin.git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: "{{ lookup('env', 'HOME') }}/.pyenv"
+    version: v2.3.4
+
+- name: "Ensure shell startup file sets up correct environment"
+  lineinfile:
+    path: "{{ shell_startup_file_path }}"
+    line: "{{ item.value.line }}"
+    state: present
+
+  with_dict: "{{lines}}"
+  vars:
+    # Assumption: This will only work for certain shells (like zsh, bash, etc.)
+    lines:
+      pyenv_root:
+        line: export PYENV_ROOT="$HOME/.pyenv"
+      export_pyenv_bin:
+        line: command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+      pyenv_init:
+        line: eval "$(pyenv init -)"

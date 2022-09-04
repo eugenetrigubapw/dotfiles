@@ -1,12 +1,23 @@
 # Dotfiles
 
-Personal dotfiles for a FreeBSD and Linux system.
+Personal dotfiles.
 
-## Setup
+## Installation
+
+### Bootstrap
+
+To get the repo and bootstrap any requirements, you'll want to do a git clone and run the included bootstrap shell script.
 
 ```
 $ git clone git@github.com:eugenetriguba/dotfiles.git
 $ cd dotfiles
-$ chmod +x install
-$ ./install
+$ chmod u+x bootstrap
+$ ./bootstrap
+```
+
+### Run
+
+```
+$ chmod u+x run
+$ ./run
 ```
