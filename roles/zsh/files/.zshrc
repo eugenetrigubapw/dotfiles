@@ -8,6 +8,10 @@ setopt prompt_subst
 NEWLINE=$'\n'
 PROMPT=' %2~ ${vcs_info_msg_0_}%# '
 
+export HISTFILE=~/.zhistory
+export HISTSIZE=1000
+export SAVEHIST=1000
+
 export EDITOR="nvim"
 export BROWSER="firefox"
 export PAGER="less"
@@ -29,6 +33,9 @@ export GOBIN=$SRC_DIR/go/bin
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 alias gs="git status"
 alias gc="git commit"
