@@ -9,8 +9,8 @@ NEWLINE=$'\n'
 PROMPT=' %2~ ${vcs_info_msg_0_}%# '
 
 export HISTFILE=~/.zhistory
-export HISTSIZE=1000
-export SAVEHIST=1000
+export HISTSIZE=100000
+export SAVEHIST=100000
 
 export EDITOR="nvim"
 export BROWSER="firefox"
@@ -22,15 +22,16 @@ export SRC_DIR="$HOME/src"
 export BIN_DIR="$HOME/bin"
 
 export PATH="$HOME/.poetry/bin:$PATH"
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$BIN_DIR:$PATH"
 
-export GOPATH=$SRC_DIR/go
-export GOBIN=$SRC_DIR/go/bin
+export GOPATH="$SRC_DIR/go"
+export GOBIN="$SRC_DIR/go/bin"
 
 export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
@@ -82,8 +83,4 @@ memcheck() {
 gocover() {
     t="/tmp/go-cover.$$.tmp"
     go test -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
-}
-
-ip() {
-    ifconfig | jc --ifconfig | jq '.[] | select(.name=="wlo1") | {ipv4_addr, ipv6_addr}'
 }
