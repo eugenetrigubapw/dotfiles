@@ -1,0 +1,20 @@
+[user]
+	name = Eugene Triguba
+	email = eugenetriguba@gmail.com
+	signingkey = E2C90ACA3CC16B98
+[core]
+	editor = vim
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = ~/.gitignore
+[alias]
+	undo = reset HEAD~
+[pull]
+	ff = only
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true

@@ -1,2 +1,0 @@
----
-shell_startup_file_path: "{{ lookup('env', 'HOME') }}/.zshrc"
