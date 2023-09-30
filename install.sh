@@ -102,15 +102,15 @@ main() {
     mkdir -p $HOME/.config/nvim
     ensure_symlink_exists "$PWD/.config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 
-    mkdir -p $HOME/.config/nvim/autoload
-    # TODO: check whether vim-plug installation already exists.
-    echo "Installing vim-plug.."
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+    echo "Checking vim-plug installation.."
+    if [ -e "$HOME/.config/nvim/plugged" ]; then
+	echo "vim-plug already installed"
+    else
+	echo "Installing vim-plug.."
+        sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-    # TODO: check whether plugins are already installed
-    echo "Install vim plugins.."
-    nvim +PlugInstall +qall --headless
+        nvim +PlugInstall +qall --headless
+    fi
 }
 
 main
