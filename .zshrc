@@ -55,8 +55,6 @@ alias gv='git log --graph --decorate --oneline'
 alias h="history 25"
 alias j="jobs -l"
 alias l="ls -alG"
-alias o="xdg-open ."
-alias open="xdg-open"
 
 alias vi="nvim"
 alias vim="nvim"
