@@ -98,7 +98,6 @@ main() {
     ensure_symlink_exists "$PWD/.tmux.conf" "$HOME/.tmux.conf"
     ensure_symlink_exists "$PWD/.zshrc" "$HOME/.zshrc"
 
-    # Link Neovim
     mkdir -p $HOME/.config/nvim
     ensure_symlink_exists "$PWD/.config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 
