@@ -13,7 +13,7 @@ export HISTSIZE=100000
 export SAVEHIST=100000
 
 export EDITOR="nvim"
-export BROWSER="firefox"
+export BROWSER=
 export PAGER="less"
 
 export GPG_TTY=$(tty)
@@ -30,6 +30,8 @@ export PATH="$BIN_DIR:$PATH"
 export GOPATH="$SRC_DIR/go"
 export GOBIN="$SRC_DIR/go/bin"
 
+source "$HOME/.cargo/env"
+
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -37,6 +39,10 @@ eval "$(pyenv init -)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export LDFLAGS="-L/opt/homebrew/lib"
+export CPPFLAGS="-I/opt/homebrew/include"
+export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
 
 alias gs="git status"
 alias gc="git commit"
