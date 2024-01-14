@@ -29,6 +29,7 @@ export PATH="$BIN_DIR:$PATH"
 
 export GOPATH="$SRC_DIR/go"
 export GOBIN="$SRC_DIR/go/bin"
+export PATH="$GOBIN:$PATH"
 
 source "$HOME/.cargo/env"
 
