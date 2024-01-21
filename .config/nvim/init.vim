@@ -23,6 +23,9 @@ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 " sw - when indenting with '>', use 4 spaces width
 " sts - control <tab> and <bs> keys to match tabstop
 
+" Go-specific whitespace file settings
+au BufNewFile,BufRead *.go setlocal noet tabstop=4 shiftwidth=4 softtabstop=4
+
 " General whitespace settings
 set shiftwidth=4
 filetype plugin indent on
@@ -34,6 +37,8 @@ set backspace=indent,eol,start
 " eol     allow backspacing over line breaks (join lines)
 " start   allow backspacing over the start of insert; CTRL-W and CTRL-U
 "         stop once at the start of insert.
+
+
 call plug#begin("$HOME/.config/nvim/plugged")
 
 " Auto complete
@@ -59,6 +64,9 @@ Plug 'sainnhe/everforest'
 
 " Terraform
 Plug 'hashivim/vim-terraform'
+
+" Go support
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
