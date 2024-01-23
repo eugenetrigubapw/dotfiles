@@ -19,13 +19,13 @@ export PAGER="less"
 export GPG_TTY=$(tty)
 
 export SRC_DIR="$HOME/src"
-export BIN_DIR="$HOME/bin"
+export BIN_DIR="$SRC_DIR/bin"
 
+export PATH="$BIN_DIR:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$BIN_DIR:$PATH"
 
 export GOPATH="$SRC_DIR/go"
 export GOBIN="$SRC_DIR/go/bin"

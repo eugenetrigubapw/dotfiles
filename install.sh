@@ -92,12 +92,19 @@ main() {
 
     echo "Brewfile successfully installed. Moving to linking dotfiles.."
 
-    ensure_symlink_exists "$PWD/bin" "$HOME/bin"
+    echo "Linking bin.."
+    mkdir "$HOME/src"
+    ensure_symlink_exists "$PWD/bin" "$HOME/src/bin"
+    echo "Linking gdb init.."
     ensure_symlink_exists "$PWD/.gdbinit" "$HOME/.gdbinit"
+    echo "Linking git config.."
     ensure_symlink_exists "$PWD/.gitconfig" "$HOME/.gitconfig"
+    echo "Linking tmux config.."
     ensure_symlink_exists "$PWD/.tmux.conf" "$HOME/.tmux.conf"
+    echo "Linking zshrc.."
     ensure_symlink_exists "$PWD/.zshrc" "$HOME/.zshrc"
 
+    echo "Linking vim config.."
     mkdir -p $HOME/.config/nvim
     ensure_symlink_exists "$PWD/.config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 
