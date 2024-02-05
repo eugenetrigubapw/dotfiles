@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for url in "$@"; do
+    yt-dlp -x --audio-format mp3 "$url"
+done
+
