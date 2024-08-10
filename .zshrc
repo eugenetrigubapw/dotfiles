@@ -33,6 +33,9 @@ export PATH="$GOBIN:$PATH"
 
 source "$HOME/.cargo/env"
 
+export BAT_THEME="gruvbox-dark"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
+
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -100,10 +103,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-# bat
-export BAT_THEME="gruvbox-dark"
-#
 
 export CPPFLAGS="-I/usr/local/opt/readline/include"
 export LDFLAGS="-L/usr/local/opt/readline/lib"

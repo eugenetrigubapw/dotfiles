@@ -105,14 +105,22 @@ main() {
     echo "Linking bin.."
     mkdir "$HOME/src"
     ensure_symlink_exists "$PWD/bin" "$HOME/src/bin"
+
     echo "Linking gdb init.."
     ensure_symlink_exists "$PWD/.gdbinit" "$HOME/.gdbinit"
+
     echo "Linking git config.."
     ensure_symlink_exists "$PWD/.gitconfig" "$HOME/.gitconfig"
+
     echo "Linking tmux config.."
     ensure_symlink_exists "$PWD/.tmux.conf" "$HOME/.tmux.conf"
+
     echo "Linking zshrc.."
     ensure_symlink_exists "$PWD/.zshrc" "$HOME/.zshrc"
+
+    echo "Linked gpg agent config.."
+    ensure_symlink_exists "$PWD/gpg-agent.conf" "$HOME/gnupg/gpg-agent.conf"
+    gpgconf --kill gpg-agent  # Reload the GPG agent
 
     echo "Linking vim config.."
     mkdir -p $HOME/.config/nvim
