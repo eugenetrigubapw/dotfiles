@@ -65,6 +65,9 @@ alias l="ls -alG"
 
 alias vi="nvim"
 alias vim="nvim"
+alias vicfg="nvim ~/.config/nvim/init.lua"
+
+alias python="python3"
 
 # "Compile C Program"
 #
@@ -73,12 +76,12 @@ alias vim="nvim"
 # $3: C Standard (default: c11)
 #
 # Example: ccp main.c main c99
-ccp() {
-    local prog_name=$1
-    local output_file=${2:a.out}
-    local std=${3:c11}
+function ccp() {
+    local prog_name=${1:?"Please provide the path to the program to compile"}
+    local output_file=${2:-${prog_name:r}}
+    local std=${3:-c11}
 
-    cc -Wall -W -pedantic -ansi -std=$std -o $output_file $prog_name
+    gcc -Wall -W -pedantic -ansi -std=$std -o $output_file $prog_name
 }
 
 memcheck() {
@@ -89,3 +92,19 @@ gocover() {
     t="/tmp/go-cover.$$.tmp"
     go test -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
 }
+
+# pnpm
+export PNPM_HOME="/Users/eugene/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# bat
+export BAT_THEME="gruvbox-dark"
+#
+
+export CPPFLAGS="-I/usr/local/opt/readline/include"
+export LDFLAGS="-L/usr/local/opt/readline/lib"
+export PKG_CONFIG_PATH="/usr/local/opt/readline/lib/pkgconfig"

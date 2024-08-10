@@ -50,7 +50,7 @@ ensure_symlink_exists() {
             prompt_for_confirmation "Delete and relink?"
             answer=$?
             if [ $answer -eq 0 ]; then
-                rm "$link_path" || exit 1
+                rm -r "$link_path" || exit 1
                 ln -s "$source_path" "$link_path" || exit 1
                 echo "Successfully created link to '$link_path'"
             else
@@ -62,7 +62,7 @@ ensure_symlink_exists() {
             prompt_for_confirmation "Delete and relink?"
             answer=$?
             if [ $answer -eq 0 ]; then
-                rm "$link_path" || exit 1
+                rm -r "$link_path" || exit 1
                 ln -s "$source_path" "$link_path" || exit 1
                 echo "Successfully created link to '$link_path'"
             else
@@ -71,6 +71,16 @@ ensure_symlink_exists() {
     else
         echo "Link to '$link_path' does not exist. Creating.."
         ln -s "$source_path" "$link_path" || exit 1
+    fi
+}
+
+install_packer() {
+    echo "Installing packer.nvim.."
+    if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
+        git clone --depth 1 https://github.com/wbthomason/packer.nvim \
+        "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    else
+        echo "packer.nvim is already installed."
     fi
 }
 
@@ -106,17 +116,11 @@ main() {
 
     echo "Linking vim config.."
     mkdir -p $HOME/.config/nvim
-    ensure_symlink_exists "$PWD/.config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+    ensure_symlink_exists "$PWD/.config/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 
-    echo "Checking vim-plug installation.."
-    if [ -e "$HOME/.config/nvim/plugged" ]; then
-	echo "vim-plug already installed"
-    else
-	echo "Installing vim-plug.."
-        sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-        nvim +PlugInstall +qall --headless
-    fi
+    install_packer
+    echo "Running PackerSync to install plugins.."
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 }
 
 main
