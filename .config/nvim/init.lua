@@ -136,7 +136,17 @@ require('lualine').setup {
 }
 
 -- Nvim-tree setup
-require'nvim-tree'.setup {}
+require'nvim-tree'.setup {
+  view = {
+    side = 'left',
+    width = 30,
+  },
+  actions = {
+    open_file = {
+      quit_on_open = false,
+    },
+  },
+}
 
 -- Theme setup
 vim.opt.termguicolors = true
