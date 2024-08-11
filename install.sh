@@ -119,6 +119,7 @@ main() {
     ensure_symlink_exists "$PWD/.zshrc" "$HOME/.zshrc"
 
     echo "Linked gpg agent config.."
+    mkdir -p $HOME/gnupg
     ensure_symlink_exists "$PWD/gpg-agent.conf" "$HOME/gnupg/gpg-agent.conf"
     gpgconf --kill gpg-agent  # Reload the GPG agent
 
