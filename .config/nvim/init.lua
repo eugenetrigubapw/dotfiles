@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.opt.scrolloff = 10
 vim.opt.visualbell = true
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
@@ -83,6 +84,9 @@ require("packer").startup(function(use)
   -- Git wrapper with :G
   use("tpope/vim-fugitive")
 
+  -- GitHub vim fugitive plugin
+  use("tpope/vim-rhubarb")
+
   -- Editorconfig file support
   use("editorconfig/editorconfig-vim")
 
@@ -111,6 +115,21 @@ require("packer").startup(function(use)
   use({
     "jose-elias-alvarez/null-ls.nvim",
     requires = { "nvim-lua/plenary.nvim" },
+  })
+
+  -- Terminal
+  use({ "akinsho/toggleterm.nvim", tag = "*" })
+
+  use({
+    "amrbashir/nvim-docs-view",
+    opt = true,
+    cmd = { "DocsViewToggle" },
+    config = function()
+      require("docs-view").setup({
+        position = "right",
+        width = 50,
+      })
+    end,
   })
 
   -- Automatically set up configuration after cloning packer.nvim
@@ -220,14 +239,12 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 local lspconfig = require("lspconfig")
 local lsp_servers = { "clangd", "pyright", "gopls", "tsserver", "rust_analyzer", "jdtls", "lua_ls" }
 
--- Custom configuration for lua_ls
 lspconfig.lua_ls.setup({
   settings = {
     Lua = {
       runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
         version = "LuaJIT",
-        -- Setup your lua path
+        -- Lua path
         path = vim.split(package.path, ";"),
       },
       diagnostics = {
@@ -308,17 +325,46 @@ vim.cmd("colorscheme everforest")
 -- Syntax highlighting
 vim.cmd("syntax on")
 
--- Key mappings
+-- Terminal setup
+require("toggleterm").setup({
+  size = 20,
+  open_mapping = [[<c-\>]], -- Toggle terminal with Ctrl-\
+  hide_numbers = true,
+  shade_filetypes = {},
+  shade_terminals = true,
+  shading_factor = "1",    -- The degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+  start_in_insert = true,
+  insert_mappings = true,  -- Whether or not the open mapping applies in insert mode
+  persist_size = true,
+  direction = "horizontal", -- 'vertical' | 'horizontal' | 'window' | 'float'
+  close_on_exit = true,    -- Close the terminal window when the process exits
+  shell = vim.o.shell,     -- Change the default shell
+  float_opts = {
+    border = "curved",     -- 'single' | 'double' | 'shadow' | 'curved'
+    winblend = 0,
+    highlights = {
+      border = "Normal",
+      background = "Normal",
+    },
+  },
+})
+
+--- Key mappings
+
+-- Telescope 'Find Files'
 vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true, silent = true })
+-- Telescope 'Find Grep' for text search
 vim.api.nvim_set_keymap("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true, silent = true })
+-- Telescope 'Find symbols'
 vim.api.nvim_set_keymap("n", "<leader>fs", ":Telescope treesitter<CR>", { noremap = true, silent = true })
+-- Telescope 'Find buffers'
 vim.api.nvim_set_keymap("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true, silent = true })
+
+-- LSP 'Find symbols' -- More context aware symbol information if LSP is setup for the language
 vim.api.nvim_set_keymap("n", "<leader>ls", ":Telescope lsp_document_symbols<CR>", { noremap = true, silent = true })
+-- LSP 'Find Workspace Symbols' -- Finds all symbols across the workspace rather than a single file
 vim.api.nvim_set_keymap("n", "<leader>lw", ":Telescope lsp_workspace_symbols<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>gs", ":G<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>gd", ":Gdiff<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>q", ":q<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>w", ":w<CR>", { noremap = true, silent = true })
+-- LSP 'Format' -- Formats the current file asyncronously
 vim.api.nvim_set_keymap(
   "n",
   "<leader>lf",
@@ -326,10 +372,41 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
+-- 'Git status'
+vim.api.nvim_set_keymap("n", "<leader>gs", ":G<CR>", { noremap = true, silent = true })
+-- 'Git diff'
+vim.api.nvim_set_keymap("n", "<leader>gd", ":Gdiff<CR>", { noremap = true, silent = true })
+-- 'Git diff --staged'
+vim.api.nvim_set_keymap('n', '<leader>gds', ':Gdiffsplit --staged<CR>', { noremap = true, silent = true })
+
+-- Toggle/Update docs view
+vim.api.nvim_set_keymap('n', '<leader>dt', ':DocsViewToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>du', ':DocsViewUpdate<CR>', { noremap = true, silent = true })
+
+-- Close the current window
+vim.api.nvim_set_keymap("n", "<leader>q", ":q<CR>", { noremap = true, silent = true })
+-- Save the current file
+vim.api.nvim_set_keymap("n", "<leader>w", ":w<CR>", { noremap = true, silent = true })
+
 vim.api.nvim_set_keymap("i", "<C-k>", "<cmd>lua require'luasnip'.jump(1)<CR>", { silent = true })
 vim.api.nvim_set_keymap("i", "<C-j>", "<cmd>lua require'luasnip'.jump(-1)<CR>", { silent = true })
 vim.api.nvim_set_keymap("s", "<C-k>", "<cmd>lua require'luasnip'.jump(1)<CR>", { silent = true })
 vim.api.nvim_set_keymap("s", "<C-j>", "<cmd>lua require'luasnip'.jump(-1)<CR>", { silent = true })
+
+-- Mappings for opening terminals
+vim.api.nvim_set_keymap("n", "<leader>tt", ":ToggleTerm<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>th', ':ToggleTerm size=15 direction=horizontal<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tv', ':ToggleTerm size=60 direction=vertical<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tf', ':ToggleTerm direction=float<CR>', { noremap = true, silent = true })
+
+-- Map <Esc> in terminal mode to exit to normal mode
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+
+-- Use Ctrl-[hjkl] to navigate between splits
+vim.api.nvim_set_keymap('n', '<C-k>', ':wincmd k<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent = true })
 
 -- Command to run C programs
 vim.api.nvim_create_user_command("RunC", function(opts)
