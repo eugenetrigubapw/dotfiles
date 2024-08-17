@@ -1,5 +1,6 @@
 vim.g.mapleader = " "
 vim.opt.scrolloff = 10
+vim.g.python3_host_prog = "/Users/eugene/.pyenv/versions/3.11.5/bin/python"
 vim.opt.visualbell = true
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
@@ -118,7 +119,7 @@ require("packer").startup(function(use)
   })
 
   -- Terminal
-  use({ "akinsho/toggleterm.nvim", tag = "*" })
+  use({ "akinsho/toggleterm.nvim", tag = "v2.12.0" })
 
   use({
     "amrbashir/nvim-docs-view",
