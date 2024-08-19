@@ -118,6 +118,8 @@ require("packer").startup(function(use)
     requires = { "nvim-lua/plenary.nvim" },
   })
 
+  use("chaoren/vim-wordmotion")
+
   -- Terminal
   use({ "akinsho/toggleterm.nvim", tag = "v2.12.0" })
 
