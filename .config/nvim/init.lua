@@ -135,6 +135,16 @@ require("packer").startup(function(use)
     end,
   })
 
+  use({
+    "ellisonleao/glow.nvim",
+    config = function()
+      require("glow").setup({
+        -- Configure options here
+        width = 120, -- Set the width of the preview
+      })
+    end,
+  })
+
   -- Automatically set up configuration after cloning packer.nvim
   -- This should be kept at the end after all plugins
   if packer_bootstrap then
@@ -355,19 +365,27 @@ require("toggleterm").setup({
 --- Key mappings
 
 -- Telescope 'Find Files'
-vim.api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>ff",
+  ":Telescope find_files find_command=rg,--ignore,--hidden,--files,--glob=!**/.git<CR>",
+  { noremap = true, silent = true }
+)
 -- Telescope 'Find Grep' for text search
 vim.api.nvim_set_keymap("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true, silent = true })
 -- Telescope 'Find symbols'
-vim.api.nvim_set_keymap("n", "<leader>fs", ":Telescope treesitter<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fs", ":Telescope lsp_document_symbols<CR>", { noremap = true, silent = true })
+-- Telescope 'Find Workspace Symbols' -- Finds all symbols across the workspace rather than a single file
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>fw",
+  ":Telescope lsp_dynamic_workspace_symbols<CR>",
+  { noremap = true, silent = true }
+)
 -- Telescope 'Find buffers'
 vim.api.nvim_set_keymap("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true, silent = true })
 
--- LSP 'Find symbols' -- More context aware symbol information if LSP is setup for the language
-vim.api.nvim_set_keymap("n", "<leader>ls", ":Telescope lsp_document_symbols<CR>", { noremap = true, silent = true })
--- LSP 'Find Workspace Symbols' -- Finds all symbols across the workspace rather than a single file
-vim.api.nvim_set_keymap("n", "<leader>lw", ":Telescope lsp_workspace_symbols<CR>", { noremap = true, silent = true })
--- LSP 'Format' -- Formats the current file asyncronously
+-- Telescope 'Format' -- Formats the current file asyncronously
 vim.api.nvim_set_keymap(
   "n",
   "<leader>lf",
@@ -380,11 +398,11 @@ vim.api.nvim_set_keymap("n", "<leader>gs", ":G<CR>", { noremap = true, silent = 
 -- 'Git diff'
 vim.api.nvim_set_keymap("n", "<leader>gd", ":Gdiff<CR>", { noremap = true, silent = true })
 -- 'Git diff --staged'
-vim.api.nvim_set_keymap('n', '<leader>gds', ':Gdiffsplit --staged<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>gds", ":Gdiff --staged<CR>", { noremap = true, silent = true })
 
 -- Toggle/Update docs view
-vim.api.nvim_set_keymap('n', '<leader>dt', ':DocsViewToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>du', ':DocsViewUpdate<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>dt", ":DocsViewToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>du", ":DocsViewUpdate<CR>", { noremap = true, silent = true })
 
 -- Close the current window
 vim.api.nvim_set_keymap("n", "<leader>q", ":q<CR>", { noremap = true, silent = true })
@@ -398,20 +416,38 @@ vim.api.nvim_set_keymap("s", "<C-j>", "<cmd>lua require'luasnip'.jump(-1)<CR>", 
 
 -- Mappings for opening terminals
 vim.api.nvim_set_keymap("n", "<leader>tt", ":ToggleTerm<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>th', ':ToggleTerm size=15 direction=horizontal<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>tv', ':ToggleTerm size=60 direction=vertical<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>tf', ':ToggleTerm direction=float<CR>', { noremap = true, silent = true })
-
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>th",
+  ":ToggleTerm size=15 direction=horizontal<CR>",
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>tv",
+  ":ToggleTerm size=60 direction=vertical<CR>",
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap("n", "<leader>tf", ":ToggleTerm direction=float<CR>", { noremap = true, silent = true })
+-- Increase terminal height
+vim.api.nvim_set_keymap("n", "<leader>+", ":resize +5<CR>", { noremap = true, silent = true })
+-- Decrease terminal height
+vim.api.nvim_set_keymap("n", "<leader>-", ":resize -5<CR>", { noremap = true, silent = true })
+-- Increase terminal width (for vertical terminals)
+vim.api.nvim_set_keymap("n", "<leader>>", ":vertical resize +5<CR>", { noremap = true, silent = true })
+-- Decrease terminal width (for vertical terminals)
+vim.api.nvim_set_keymap("n", "<leader><", ":vertical resize -5<CR>", { noremap = true, silent = true })
 -- Map <Esc> in terminal mode to exit to normal mode
-vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- Use Ctrl-[hjkl] to navigate between splits
-vim.api.nvim_set_keymap('n', '<C-k>', ':wincmd k<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-k>", ":wincmd k<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-j>", ":wincmd j<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-h>", ":wincmd h<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-l>", ":wincmd l<CR>", { noremap = true, silent = true })
 
--- Command to run C programs
-vim.api.nvim_create_user_command("RunC", function(opts)
-  vim.cmd("!./" .. vim.fn.expand("%<") .. " " .. opts.args)
-end, { nargs = 1 })
+vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader><space>", ":noh<CR>", { noremap = true, silent = true })
+
+-- Key mapping to preview markdown
+vim.api.nvim_set_keymap("n", "<leader>mp", ":Glow<CR>", { noremap = true, silent = true })

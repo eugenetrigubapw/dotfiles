@@ -34,7 +34,6 @@ export PATH="$GOBIN:$PATH"
 source "$HOME/.cargo/env"
 
 export BAT_THEME="gruvbox-dark"
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -44,6 +43,12 @@ eval "$(pyenv virtualenv-init -)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export PNPM_HOME="/Users/eugene/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
 export LDFLAGS="-L/opt/homebrew/lib"
 export CPPFLAGS="-I/opt/homebrew/include"
@@ -73,38 +78,3 @@ alias vicfg="nvim ~/.config/nvim/init.lua"
 
 alias python="python3"
 
-# "Compile C Program"
-#
-# $1: Program Name
-# $2: Output File (default: a.out)
-# $3: C Standard (default: c11)
-#
-# Example: ccp main.c main c99
-function ccp() {
-    local prog_name=${1:?"Please provide the path to the program to compile"}
-    local output_file=${2:-${prog_name:r}}
-    local std=${3:-c11}
-
-    gcc -Wall -W -pedantic -ansi -std=$std -o $output_file $prog_name
-}
-
-memcheck() {
-    G_DEBUG=always-malloc valgrind --tool=memcheck --leak-check=full --show-reachable=yes -s $1
-}
-
-gocover() {
-    t="/tmp/go-cover.$$.tmp"
-    go test -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
-}
-
-# pnpm
-export PNPM_HOME="/Users/eugene/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-export CPPFLAGS="-I/usr/local/opt/readline/include"
-export LDFLAGS="-L/usr/local/opt/readline/lib"
-export PKG_CONFIG_PATH="/usr/local/opt/readline/lib/pkgconfig"
