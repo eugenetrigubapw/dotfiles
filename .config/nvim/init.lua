@@ -139,8 +139,7 @@ require("packer").startup(function(use)
     "ellisonleao/glow.nvim",
     config = function()
       require("glow").setup({
-        -- Configure options here
-        width = 120, -- Set the width of the preview
+        width = 120
       })
     end,
   })
@@ -210,7 +209,7 @@ require("nvim-tree").setup({
 -- Mason setup
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { "clangd", "pyright", "gopls", "tsserver", "rust_analyzer", "jdtls", "lua_ls" },
+  ensure_installed = { "clangd", "pyright", "gopls", "ts_ls", "rust_analyzer", "jdtls", "lua_ls" },
 })
 
 -- Setup luasnip with nvim-cmp
@@ -250,7 +249,7 @@ cmp.setup({
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lspconfig = require("lspconfig")
-local lsp_servers = { "clangd", "pyright", "gopls", "tsserver", "rust_analyzer", "jdtls", "lua_ls" }
+local lsp_servers = { "clangd", "pyright", "gopls", "ts_ls", "rust_analyzer", "jdtls", "lua_ls" }
 
 lspconfig.lua_ls.setup({
   settings = {
