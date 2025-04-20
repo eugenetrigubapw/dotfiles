@@ -1,4 +1,5 @@
-require("config.options")
-require("config.keymaps")
-require("config.autocmds")
-require("config.lazy")
+require("config.options")   -- Vim Options
+require("config.keymaps")   -- Kep mappings
+require("config.autocmds")  -- Auto commands
+require("config.lazy")      -- Plugin management
+
