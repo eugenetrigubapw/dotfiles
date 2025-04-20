@@ -42,7 +42,7 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-theme = tokionight
+theme = "tokyonight"
 font-family = "Hack"
 font-size = 14
 
