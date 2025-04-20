@@ -7,8 +7,6 @@ api.nvim_create_autocmd("FileType", {
     vim.opt_local.shiftwidth = 4
     vim.opt_local.expandtab = true
     vim.opt_local.colorcolumn = "88"
-    
-    vim.keymap.set("n", "<leader>dp", "<cmd>python -m pdb %<CR>", { buffer = true })
   end,
 })
 
