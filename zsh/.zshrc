@@ -31,10 +31,6 @@ export GOPATH="$SRC_DIR/go"
 export GOBIN="$SRC_DIR/go/bin"
 export PATH="$GOBIN:$PATH"
 
-source "$HOME/.cargo/env"
-
-export BAT_THEME="gruvbox-dark"
-
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
