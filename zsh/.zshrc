@@ -19,7 +19,7 @@ export PAGER="less"
 export GPG_TTY=$(tty)
 
 export SRC_DIR="$HOME/src"
-export BIN_DIR="$SRC_DIR/bin"
+export BIN_DIR="$HOME/bin"
 
 export PATH="$BIN_DIR:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
@@ -42,7 +42,7 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 export PNPM_HOME="/Users/eugene/Library/pnpm"
 case ":$PATH:" in
@@ -50,9 +50,11 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+eval "$(brew shellenv)"
 export LDFLAGS="-L/opt/homebrew/lib"
 export CPPFLAGS="-I/opt/homebrew/include"
 export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
 alias gs="git status"
 alias gc="git commit"
@@ -72,9 +74,7 @@ alias h="history 25"
 alias j="jobs -l"
 alias l="ls -alG"
 
+alias lg="lazygit"
 alias vi="nvim"
 alias vim="nvim"
-alias vicfg="nvim ~/.config/nvim/init.lua"
-
-alias python="python3"
 

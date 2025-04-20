@@ -3,11 +3,9 @@
 	email = eugenetriguba@gmail.com
 	signingkey = E2C90ACA3CC16B98
 [core]
-	editor = vim
+	editor = nvim
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore
-[alias]
-	undo = reset HEAD~
 [pull]
 	ff = only
 [fetch]
@@ -21,6 +19,3 @@
 [gpg]
 	program = gpg
 
-[credential "https://github.gatech.edu"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
