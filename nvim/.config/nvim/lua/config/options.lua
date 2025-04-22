@@ -18,3 +18,14 @@ opt.smartcase = true
 opt.termguicolors = true
 opt.signcolumn = "yes"
 opt.cursorline = true
+
+-- Files
+opt.swapfile = false
+opt.backup = false
+opt.undofile = true
+opt.undodir = vim.fn.stdpath("data") .. "/undodir"
+
+-- Behavior
+opt.hidden = true
+opt.scrolloff = 8
+opt.mouse = "a"
