@@ -7,15 +7,29 @@ return {
     end,
   },
   {
-  "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.8',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require("telescope").setup {
+        extensions = {
+          file_browser = {
+            theme = "ivy",
+            hijack_netrw = true,
+          },
+        },
+      }
+    end,
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-      -- {"3rd/image.nvim", opts = {}},
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim"
     },
-    lazy = false,
-    opts = {},
+    version = false,
+    config = function()
+      require("telescope").load_extension "file_browser"
+    end,
   }
 }
