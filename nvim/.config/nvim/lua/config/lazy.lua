@@ -66,7 +66,7 @@ require('lazy').setup({
   },
   install = { colorscheme = { 'tokyonight' } },
   -- Check for plugin updates automatically.
-  checker = { enabled = true },
+  checker = { enabled = true, notify = false },
 }, {
   ui = {
     -- If Nerd Fonts are enabled, we set the icons to an empty table to use the
