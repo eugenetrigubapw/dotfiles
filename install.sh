@@ -9,10 +9,7 @@
 # 1 status code.
 install_homebrew() {
   /usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  (
-    echo
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"'
-  ) >>$HOME/.zprofile
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>"$HOME/.zprofile"
   eval "$(/opt/homebrew/bin/brew shellenv)"
 
   homebrew_exists=$(command -v brew)
@@ -31,8 +28,8 @@ install_homebrew() {
 # Returns:
 #   0 on yes. 1 on no.
 prompt_for_confirmation() {
-  printf "$1 [y/n]: "
-  read answer
+  printf "%s [y/n]: " "$1"
+  read -r answer
   if [ "$answer" != "${answer#[Yy]}" ]; then
     return 0
   else
@@ -45,8 +42,8 @@ ensure_symlink_exists() {
   link_path="$2"
 
   echo "Checking link to '$link_path'.."
-  if [ -L $link_path ]; then
-    if [ -e $link_path ]; then
+  if [ -L "$link_path" ]; then
+    if [ -e "$link_path" ]; then
       echo "Valid '$link_path' link exists."
     else
       echo "'$link_path' link exists, but it is a broken link."
@@ -60,7 +57,7 @@ ensure_symlink_exists() {
         echo "Leaving file alone, moving on.."
       fi
     fi
-  elif [ -e $link_path ]; then
+  elif [ -e "$link_path" ]; then
     echo "'$link_path' exists, but it isn't a symbolic link file."
     prompt_for_confirmation "Delete and relink?"
     answer=$?

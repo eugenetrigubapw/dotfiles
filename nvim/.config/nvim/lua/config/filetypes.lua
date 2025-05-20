@@ -1,7 +1,5 @@
-local api = vim.api
-
-api.nvim_create_autocmd("FileType", {
-  pattern = "python",
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
   callback = function()
     -- PEP 8 indentation settings
     vim.opt_local.tabstop = 4
@@ -10,24 +8,24 @@ api.nvim_create_autocmd("FileType", {
     vim.opt_local.expandtab = true
 
     -- 88 character length lines for Black formatter
-    vim.opt_local.colorcolumn = "88"
+    vim.opt_local.colorcolumn = '88'
 
-    -- Google-style docstrings 
-    g.python_style = "google"
+    -- Google-style docstrings
+    vim.g.python_style = 'google'
   end,
 })
 
-api.nvim_create_autocmd("FileType", {
-  pattern = "lua",
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'lua',
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.shiftwidth = 2
-    vim.opt_local.commentstring = "-- %s"
+    vim.opt_local.commentstring = '-- %s'
   end,
 })
 
-api.nvim_create_autocmd("FileType", {
-  pattern = { "html", "css", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'html', 'css', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.shiftwidth = 2
