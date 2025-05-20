@@ -70,6 +70,7 @@ alias h="history 25"
 alias j="jobs -l"
 alias l="ls -alG"
 
+alias tf="terraform"
 alias lg="lazygit"
 alias vi="nvim"
 alias vim="nvim"
