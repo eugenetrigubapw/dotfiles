@@ -7,7 +7,6 @@ return {
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = 'all',
-      ignore_installed = 'norg',
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
