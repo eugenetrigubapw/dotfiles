@@ -15,6 +15,7 @@ export SAVEHIST=100000
 export EDITOR="nvim"
 export BROWSER=
 export PAGER="less"
+export TERM="xterm-256color"
 
 export GPG_TTY=$(tty)
 
