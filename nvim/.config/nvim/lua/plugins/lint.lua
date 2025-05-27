@@ -6,7 +6,11 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        cpp = { 'cppcheck' },
+        dockerfile = { 'hadolint' },
+        json = { 'jsonlint' },
+        terraform = { 'tflint' },
+        python = { 'ruff', 'bandit' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
