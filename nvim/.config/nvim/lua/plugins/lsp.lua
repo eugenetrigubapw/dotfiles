@@ -202,7 +202,7 @@ return {
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+      -- Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
       --  Add any additional override configuration in the following tables. Available keys are:
       --  - cmd (table): Override the default command used to start the server
@@ -228,6 +228,7 @@ return {
             },
           },
         },
+        stylua = {}
       }
 
       -- Ensure the servers and tools above are installed
@@ -244,11 +245,7 @@ return {
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
-      })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Populated via mason-tool-installer)
         automatic_installation = false,
@@ -260,6 +257,23 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+
+            -- When we're editing the monolith project, the dependencies are so old
+            -- we can't install them locally on an ARM mac. Therefore, we want to use
+            -- a pyright server *within* the docker container.
+            print("[DEBUG] server_name: " .. server_name)
+            if server_name == "pyright" then
+              local cwd = vim.loop.cwd()
+              print("[DEBUG] cwd: " .. cwd)
+              if cwd and cwd:match("monolith") then
+                print("[DEBUG] Using Dockerized Pyright setup")
+                vim.notify("[LSP] Using Docker for pyright in " .. cwd, vim.log.levels.INFO)
+                server.cmd = {
+                  "docker", "exec", "-i", "monolith-web", "pyright-langserver", "--stdio"
+                }
+              end
+            end
+
             require('lspconfig')[server_name].setup(server)
           end,
         },
