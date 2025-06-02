@@ -50,4 +50,5 @@ keybind = cmd+/=new_split:right
 keybind = cmd+.=new_split:down
 keybind = global:cmd+shift+t=toggle_quick_terminal
 
+quick-terminal-autohide = false
 macos-option-as-alt = true
