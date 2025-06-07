@@ -186,6 +186,7 @@ return {
           },
         },
         tailwindcss = {},
+        mesonlsp = {},
       }
 
       -- Ensure the servers and tools above are installed
