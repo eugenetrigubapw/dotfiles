@@ -40,3 +40,14 @@ map('n', '<C-S-h>', '<C-w>H', { desc = 'Move window to the left' })
 map('n', '<C-S-l>', '<C-w>L', { desc = 'Move window to the right' })
 map('n', '<C-S-j>', '<C-w>J', { desc = 'Move window to the lower' })
 map('n', '<C-S-k>', '<C-w>K', { desc = 'Move window to the upper' })
+
+local function confirm_and_delete_buffer()
+  local confirm = vim.fn.confirm("Delete buffer and file?", "&Y\n&N", 2)
+
+  if confirm == 1 then
+    os.remove(vim.fn.expand "%")
+    vim.api.nvim_buf_delete(0, { force = true })
+  end
+end
+
+map('n', '<leader>df', confirm_and_delete_buffer)

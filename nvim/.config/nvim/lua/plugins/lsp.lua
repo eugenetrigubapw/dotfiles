@@ -173,7 +173,15 @@ return {
         -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
         clangd = {},
         gopls = {},
-        pyright = {},
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                autoImportCompletions = true,
+              },
+            },
+          },
+        },
         rust_analyzer = {},
         -- NOTE: https://github.com/pmizio/typescript-tools.nvim may be a better
         -- LSP to use here at some point.
@@ -216,23 +224,6 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-
-            -- When we're editing the monolith project, the dependencies are so old
-            -- we can't install them locally on an ARM mac. Therefore, we want to use
-            -- a pyright server *within* the docker container.
-            print("[DEBUG] server_name: " .. server_name)
-            if server_name == "pyright" then
-              local cwd = vim.loop.cwd()
-              print("[DEBUG] cwd: " .. cwd)
-              if cwd and cwd:match("monolith") then
-                print("[DEBUG] Using Dockerized Pyright setup")
-                vim.notify("[LSP] Using Docker for pyright in " .. cwd, vim.log.levels.INFO)
-                server.cmd = {
-                  "docker", "exec", "-i", "monolith-web", "pyright-langserver", "--stdio"
-                }
-              end
-            end
-
             require('lspconfig')[server_name].setup(server)
           end,
         },
