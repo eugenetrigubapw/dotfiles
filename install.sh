@@ -95,7 +95,6 @@ main() {
   stow nvim
   stow zsh
   stow git
-  stow gdb
   stow gpg
   stow tmux
   stow ghostty

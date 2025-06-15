@@ -13,7 +13,7 @@ export HISTSIZE=100000
 export SAVEHIST=100000
 
 export EDITOR="nvim"
-export BROWSER=
+export BROWSER="brave"
 export BAT_THEME="tokyonight_night"
 export MANPAGER="less"
 export PAGER="less"
@@ -35,8 +35,6 @@ export GOBIN="$SRC_DIR/go/bin"
 export PATH="$GOBIN:$PATH"
 
 source "$HOME/.cargo/env"
-
-export BAT_THEME="gruvbox-dark"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -77,7 +75,6 @@ alias h="history 25"
 alias j="jobs -l"
 alias l="ls -alG"
 
-alias lg="lazygit"
 alias vi="nvim"
 alias vim="nvim"
 
