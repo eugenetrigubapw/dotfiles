@@ -14,6 +14,8 @@ export SAVEHIST=100000
 
 export EDITOR="nvim"
 export BROWSER=
+export BAT_THEME="tokyonight_night"
+export MANPAGER="less"
 export PAGER="less"
 export TERM="xterm-256color"
 
