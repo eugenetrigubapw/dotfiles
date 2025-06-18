@@ -9,3 +9,7 @@ vim.g.have_nerd_font = true
 -- Disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- Set Python 3 to a virtual environment with `pynvim` installed
+-- to support python plugins.
+vim.g.python3_host_prog = vim.fn.expand '~/.config/nvim/venv/bin/python'
