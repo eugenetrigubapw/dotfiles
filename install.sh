@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -eou pipefail
+
 #
 # Install the Homebrew Brewfile and setup symbolic links to the
 # dotfiles.
@@ -34,43 +36,6 @@ prompt_for_confirmation() {
     return 0
   else
     return 1
-  fi
-}
-
-ensure_symlink_exists() {
-  source_path="$1"
-  link_path="$2"
-
-  echo "Checking link to '$link_path'.."
-  if [ -L "$link_path" ]; then
-    if [ -e "$link_path" ]; then
-      echo "Valid '$link_path' link exists."
-    else
-      echo "'$link_path' link exists, but it is a broken link."
-      prompt_for_confirmation "Delete and relink?"
-      answer=$?
-      if [ $answer -eq 0 ]; then
-        rm -r "$link_path" || exit 1
-        ln -s "$source_path" "$link_path" || exit 1
-        echo "Successfully created link to '$link_path'"
-      else
-        echo "Leaving file alone, moving on.."
-      fi
-    fi
-  elif [ -e "$link_path" ]; then
-    echo "'$link_path' exists, but it isn't a symbolic link file."
-    prompt_for_confirmation "Delete and relink?"
-    answer=$?
-    if [ $answer -eq 0 ]; then
-      rm -r "$link_path" || exit 1
-      ln -s "$source_path" "$link_path" || exit 1
-      echo "Successfully created link to '$link_path'"
-    else
-      echo "Leaving file alone, moving on.."
-    fi
-  else
-    echo "Link to '$link_path' does not exist. Creating.."
-    ln -s "$source_path" "$link_path" || exit 1
   fi
 }
 
