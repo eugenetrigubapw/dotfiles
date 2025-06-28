@@ -192,7 +192,7 @@ return {
             },
           },
         },
-        stylua = {}
+        stylua = {},
         tailwindcss = {},
         mesonlsp = {},
       }
