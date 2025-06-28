@@ -1,19 +1,16 @@
-autoload -Uz vcs_info
-zstyle ":vcs_info:*" enable git svn
-zstyle ':vcs_info:git:*' formats '%F{green}(%b)%f '
-precmd() {
-    vcs_info
-}
-setopt prompt_subst
-NEWLINE=$'\n'
-PROMPT=' %2~ ${vcs_info_msg_0_}%# '
+#!/usr/bin/env zsh
+
+source ~/.zsh/prompt.sh
+
+autoload -Uz compinit
+compinit
 
 export HISTFILE=~/.zhistory
 export HISTSIZE=100000
 export SAVEHIST=100000
 
 export EDITOR="nvim"
-export BROWSER="brave"
+export BROWSER="vivaldi"
 export BAT_THEME="tokyonight_night"
 export MANPAGER="less"
 export PAGER="less"
@@ -47,8 +44,8 @@ export NVM_DIR="$HOME/.nvm"
 
 export PNPM_HOME="/Users/eugene/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
 eval "$(brew shellenv)"
@@ -77,4 +74,3 @@ alias l="ls -alG"
 
 alias vi="nvim"
 alias vim="nvim"
-
