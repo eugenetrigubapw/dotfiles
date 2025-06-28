@@ -22,5 +22,19 @@ return {
         },
       },
     },
+    filtered_items = {
+      visible = true,
+      hide_dotfiles = false,
+      hide_gitignored = true,
+      hide_by_name = {
+        '.DS_Store',
+        'thumbs.db',
+        '.git',
+      },
+      always_show_by_pattern = {
+        '.env*',
+        '.gitignore',
+      },
+    },
   },
 }

@@ -14,6 +14,7 @@ return {
       lint.linters_by_ft['terraform'] = { 'tflint' }
       lint.linters_by_ft['python'] = { 'ruff', 'bandit' }
       lint.linters_by_ft['markdown'] = nil
+      lint.linters_by_ft['text'] = nil
       lint.linters_by_ft['sh'] = { 'shellcheck' }
 
       -- Default linters, which will cause errors unless these tools are available:
