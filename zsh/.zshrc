@@ -1,19 +1,18 @@
-autoload -Uz vcs_info
-zstyle ":vcs_info:*" enable git svn
-zstyle ':vcs_info:git:*' formats '%F{green}(%b)%f '
-precmd() {
-    vcs_info
-}
-setopt prompt_subst
-NEWLINE=$'\n'
-PROMPT=' %2~ ${vcs_info_msg_0_}%# '
+#!/usr/bin/env zsh
+
+source ~/.zsh/prompt.sh
+
+autoload -Uz compinit
+compinit
 
 export HISTFILE=~/.zhistory
 export HISTSIZE=100000
 export SAVEHIST=100000
 
 export EDITOR="nvim"
-export BROWSER=
+export BROWSER="vivaldi"
+export BAT_THEME="tokyonight_night"
+export MANPAGER="less"
 export PAGER="less"
 export TERM="xterm-256color"
 
@@ -32,6 +31,8 @@ export GOPATH="$SRC_DIR/go"
 export GOBIN="$SRC_DIR/go/bin"
 export PATH="$GOBIN:$PATH"
 
+source "$HOME/.cargo/env"
+
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -43,8 +44,8 @@ export NVM_DIR="$HOME/.nvm"
 
 export PNPM_HOME="/Users/eugene/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
 eval "$(brew shellenv)"
@@ -72,7 +73,5 @@ alias j="jobs -l"
 alias l="ls -alG"
 
 alias tf="terraform"
-alias lg="lazygit"
 alias vi="nvim"
 alias vim="nvim"
-

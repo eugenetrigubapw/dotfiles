@@ -1,11 +1,102 @@
-#!/bin/sh
+#!/usr/bin/env bash
+# Clone all repositories from a GitHub user or organization using the gh CLI.
 #
-# Clone down all repositories from a GitHub entity.
+# Usage:
+#   gh-clone-all [--exclude-archived] [--exclude-forks] [--pull] <github-entity> [target-directory]
 #
 # Args:
-#   $1: The entity name to clone. i.e. github.com/eugenetriguba => eugenetriguba
+#   --exclude-archived: If set, skip archived repos (default: include all)
+#   --exclude-forks: If set, skip forked repos
+#   --pull: If set, pull latest changes in existing repos
+#   --limit: The maximum number of repos to clone (default: 10000)
+#   <github-entity>: The GitHub username or org (e.g. eugenetriguba)
+#   [target-directory]: Optional directory to clone repos into
+set -euo pipefail
 
-gh repo list "$1" --limit 10000 | while read -r repo _; do
-  gh repo clone "$repo" "$repo"
-done
+EXCLUDE_ARCHIVED=0
+EXCLUDE_FORKS=0
+PULL_EXISTING=0
+ENTITY=""
+TARGET_DIR="."
+LIMIT=10000
 
+main() {
+  parse_args "$@"
+  clone_all_repos
+}
+
+parse_args() {
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+    --exclude-archived)
+      EXCLUDE_ARCHIVED=1
+      shift
+      ;;
+    --exclude-forks)
+      EXCLUDE_FORKS=1
+      shift
+      ;;
+    --pull)
+      PULL_EXISTING=1
+      shift
+      ;;
+    --limit)
+      LIMIT="$2"
+      shift 2
+      ;;
+    -*)
+      usage
+      ;;
+    *)
+      if [[ -z "$ENTITY" ]]; then
+        ENTITY="$1"
+      elif [[ "$TARGET_DIR" == "." ]]; then
+        TARGET_DIR="$1"
+      else
+        usage
+      fi
+      shift
+      ;;
+    esac
+  done
+  if [[ -z "$ENTITY" ]]; then
+    usage
+  fi
+  mkdir -p "$TARGET_DIR"
+}
+
+usage() {
+  echo "Usage: $0 [--exclude-archived] [--exclude-forks] [--pull] [--limit] <github-entity> [target-directory]"
+  exit 1
+}
+
+clone_all_repos() {
+  gh repo list "$ENTITY" --limit "$LIMIT" --json name,sshUrl,archivedAt,isFork |
+    jq -c '.[]' | while read -r repo; do
+    NAME=$(echo "$repo" | jq -r '.name')
+    CLONE_URL=$(echo "$repo" | jq -r '.sshUrl')
+    ARCHIVED_AT=$(echo "$repo" | jq -r '.archivedAt')
+    IS_FORK=$(echo "$repo" | jq -r '.isFork')
+    DEST="$TARGET_DIR/$NAME"
+    if [[ "$EXCLUDE_ARCHIVED" -eq 1 && "$ARCHIVED_AT" != "null" ]]; then
+      continue
+    fi
+    if [[ "$EXCLUDE_FORKS" -eq 1 && "$IS_FORK" == "true" ]]; then
+      continue
+    fi
+    if [[ -d "$DEST" ]]; then
+      echo "Repo $NAME already exists."
+      if [[ "$PULL_EXISTING" -eq 1 ]]; then
+        echo "Pulling latest changes in $DEST"
+        git -C "$DEST" pull --ff-only || echo "Warning: git pull failed in $DEST, continuing..."
+      else
+        echo "Skipping $NAME (already exists)"
+      fi
+      continue
+    fi
+    echo "Cloning $CLONE_URL into $DEST"
+    git clone "$CLONE_URL" "$DEST"
+  done
+}
+
+main "$@"
