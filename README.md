@@ -1,8 +1,8 @@
 # Dotfiles
 
-These are my personal dotfiles that I use on all my macOS systems.
+These are my personal dotfiles for macOS systems.
 
-They're managed by [GNU Stow](https://www.gnu.org/software/stow/). That is the tool that sets up the symlinks from the files in this repo here to where they belong in `$HOME`. Furthermore, included are scripts to syncing and install a Brewfile.
+All configuration files are managed using [GNU Stow](https://www.gnu.org/software/stow/), which automatically creates symlinks from this repository to the appropriate locations in your `$HOME` directory. The repository also includes scripts for managing and syncing your Homebrew packages via a Brewfile.
 
 ## Installation
 
@@ -17,12 +17,12 @@ chmod u+x install.sh
 
 ## Homebrew Packages
 
-To sync your manually installed Homebrew formulae and casks, use:
+To update your `homebrew/Brewfile` with your currently installed Homebrew formulae and casks, run:
 
 ```sh
 chmod u+x homebrew/sync-brewfile.sh
 ./homebrew/sync-brewfile.sh
 ```
 
-This will update `homebrew/Brewfile` with your current manually installed Homebrew packages (it does not install or remove any packages). You can then run `git diff` to review the changes.
+This script only updates the `homebrew/Brewfile` with your current manually installed Homebrew packages; it does not install or remove any packages. You can then use `git diff` to review the changes.
 
