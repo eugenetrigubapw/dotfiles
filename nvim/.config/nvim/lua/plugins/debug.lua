@@ -142,7 +142,7 @@ local function setup_keymaps(dap, dapui)
     ['<F2>'] = { dap.step_over, 'Debug: Step Over' },
     ['<F3>'] = { dap.step_out, 'Debug: Step Out' },
     ['<F7>'] = { dapui.toggle, 'Debug: See last session result' },
-    ['<leader>tb'] = { dap.toggle_breakpoint, 'Debug: Toggle Breakpoint' },
+    ['<leader>tB'] = { dap.toggle_breakpoint, 'Debug: Toggle Breakpoint' },
     ['<leader>B'] = {
       function()
         dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
