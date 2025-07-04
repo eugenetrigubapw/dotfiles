@@ -18,10 +18,12 @@ return {
     },
     build = 'make tiktoken', -- Only on MacOS or Linux
     config = function()
-      require('CopilotChat').setup {}
-      vim.keymap.set('n', '<leader>cc', function()
+      require('CopilotChat').setup {
+        model = 'gpt-4o',
+      }
+      vim.keymap.set('n', '<leader>tc', function()
         vim.cmd 'CopilotChatToggle'
-      end, { desc = '[Copilot] Toggle Copilot Chat' })
+      end, { desc = '[T]oggle [C]opilot Chat' })
     end,
   },
 }

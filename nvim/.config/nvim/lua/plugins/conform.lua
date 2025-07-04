@@ -106,6 +106,9 @@ return {
         black = {
           prepend_args = { '--line-length', '120' },
         },
+        shfmt = {
+          args = { '-i', '2' },
+        },
       },
     },
     config = function(_, opts)
