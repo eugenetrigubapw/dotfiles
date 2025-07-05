@@ -16,6 +16,7 @@ return {
       lint.linters_by_ft['markdown'] = nil
       lint.linters_by_ft['text'] = nil
       lint.linters_by_ft['sh'] = { 'shellcheck' }
+      lint.linters.shellcheck.args = { '-x' }
 
       -- Default linters, which will cause errors unless these tools are available:
       -- {
