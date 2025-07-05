@@ -1,4 +1,5 @@
 # Plugin manager
+set-environment -g TMUX_PLUGIN_MANAGER_PATH "$HOME/.config/tmux/plugins/"
 set-option -g @plugin 'tmux-plugins/tpm'
 
 # 'Sensible' set of defaults
@@ -24,4 +25,21 @@ set-option -g @resurrect-strategy-nvim 'session'
 # Vim Tmux Navigator allows you to navigate between Vim and tmux panes
 set-option -g @plugin 'christoomey/vim-tmux-navigator'
 
-run '~/.tmux/plugins/tpm/tpm'
+set-option -g @plugin 'tmux-plugins/tmux-yank'
+set-option -g @plugin 'tmux-plugins/tmux-open'
+set-option -g @plugin 'tmux-plugins/tmux-copycat'
+
+set-option -g @plugin "janoamaral/tokyo-night-tmux"
+set -g @tokyo-night-tmux_theme night
+set -g @tokyo-night-tmux_transparent 1
+set -g @tokyo-night-tmux_window_id_style digital
+set -g @tokyo-night-tmux_pane_id_style hsquare
+set -g @tokyo-night-tmux_zoom_id_style dsquare
+set -g @tokyo-night-tmux_terminal_icon 
+set -g @tokyo-night-tmux_active_terminal_icon 
+set -g @tokyo-night-tmux_window_tidy_icons 1
+set -g @tokyo-night-tmux_show_datetime 1
+set -g @tokyo-night-tmux_date_format YMD
+set -g @tokyo-night-tmux_time_format 24H
+
+run '$HOME/.config/tmux/plugins/tpm/tpm'

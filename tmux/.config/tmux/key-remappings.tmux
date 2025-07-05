@@ -1,6 +1,3 @@
-# Start from a blank slate. Unremap all default key bindings.
-# unbind-key -a
-
 # Remap prefix from 'C-b' to 'C-a'
 #
 # This works well if you remap the regular Caps Lock key to Ctrl.
@@ -16,6 +13,6 @@ bind-key - split-window -v
 unbind '"'
 unbind %
 
-bind-key r source-file ~/.config/tmux/tmux.conf
+bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded!"
 bind-key x kill-pane
 
