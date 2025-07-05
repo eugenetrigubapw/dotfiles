@@ -26,6 +26,11 @@ main() {
   stow tmux
   stow ghostty
   echo "Successfully linked all dotfiles."
+
+  echo "Initializing TPM (Tmux Plugin Manager)..."
+  setup_tpm
+
+  echo "Setup complete!"
 }
 
 # Prompt the user for confirmation on an action.
@@ -60,6 +65,36 @@ install_homebrew() {
   if ! command -v brew >/dev/null 2>&1; then
     echo "Failed to install homebrew"
     exit 1
+  fi
+}
+
+setup_tpm() {
+  local tpm_dir="$HOME/.config/tpm/plugins/tpm"
+  if [[ ! -d "$tpm_dir" ]]; then
+    echo "Cloning TPM..."
+    git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+  else
+    echo "TPM already exists, updating..."
+    (cd "$tpm_dir" && git pull)
+  fi
+
+  if command -v tmux >/dev/null 2>&1; then
+    echo "Installing tmux plugins..."
+    # Start a tmux server in the background and install plugins
+    tmux start-server
+    tmux new-session -d -s tpm_install
+    tmux send-keys -t tpm_install "$tpm_dir/scripts/install_plugins.sh" Enter
+
+    # Wait a moment for plugins to install
+    sleep 3
+
+    # Kill the temporary session
+    tmux kill-session -t tpm_install 2>/dev/null || true
+
+    echo "TPM plugins installed successfully."
+  else
+    echo "Warning: tmux not found. TPM cloned but plugins not installed."
+    echo "Run 'tmux' and then press 'prefix + I' to install plugins manually."
   fi
 }
 
