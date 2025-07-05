@@ -16,3 +16,6 @@ unbind %
 bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded!"
 bind-key x kill-pane
 
+bind-key -n 'C-t' run-shell -b "${HOME}/bin/tmux-toggle-term"
+bind-key -n 'C-f' run-shell -b "${HOME}/bin/tmux-toggle-term float"
+
