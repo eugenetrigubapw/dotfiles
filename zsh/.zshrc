@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 source ~/.zsh/prompt.sh
+source ~/.zsh/tmux.sh
 
 autoload -Uz compinit
 compinit
