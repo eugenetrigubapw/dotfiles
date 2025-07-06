@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -uo pipefail
+
 FLOAT_TERM="${1:-}"
 LIST_PANES="$(tmux list-panes -F '#F')"
 PANE_ZOOMED="$(echo "${LIST_PANES}" | grep Z)"
 PANE_COUNT="$(echo "${LIST_PANES}" | wc -l | bc)"
+
 if [ -n "${FLOAT_TERM}" ]; then
   if [ "$(tmux display-message -p -F "#{session_name}")" = "popup" ]; then
     tmux detach-client
