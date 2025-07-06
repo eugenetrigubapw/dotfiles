@@ -9,4 +9,3 @@ source ~/.zsh/env.sh
 source ~/.zsh/path.sh
 source ~/.zsh/languages.sh
 source ~/.zsh/aliases.sh
-
