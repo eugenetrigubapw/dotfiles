@@ -5,6 +5,7 @@ return {
   opts = {},
   dependencies = { { 'echasnovski/mini.icons', opts = {} } },
   config = function(_, opts)
+    vim.keymap.set('n', '\\', '<CMD>Oil --float<CR>', { desc = 'Open parent directory in floating window' })
     vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
     require('oil').setup(opts)
   end,
