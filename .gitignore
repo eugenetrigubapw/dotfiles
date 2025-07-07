@@ -1,2 +1,3 @@
 .DS_Store
 /tags
+/tmux/.config/tmux/plugins

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eou pipefail
 
 # Create a new Brewfile with only manually installed formulae and casks
 (
