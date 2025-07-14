@@ -18,6 +18,6 @@ bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloa
 bind-key x kill-pane
 
 # Add key bindings for toggling terminal windows
-bind-key -n 'C-\\' run-shell -b "${HOME}/bin/tmux-toggle-term"
+bind-key -n 'C-;' run-shell -b "${HOME}/bin/tmux-toggle-term"
 bind-key -n 'C-f' run-shell -b "${HOME}/bin/tmux-toggle-term float"
 

@@ -41,5 +41,6 @@ set -g @tokyo-night-tmux_window_tidy_icons 1
 set -g @tokyo-night-tmux_show_datetime 1
 set -g @tokyo-night-tmux_date_format YMD
 set -g @tokyo-night-tmux_time_format 24H
+set -g @tokyo-night-tmux_show_git 0
 
 run '$HOME/.config/tmux/plugins/tpm/tpm'
