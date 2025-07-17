@@ -55,7 +55,7 @@ return {
         end
 
         -- Disable "format_on_save lsp_fallback" for certain languages.
-        local disable_filetypes = { sql = true, c = true, cpp = true }
+        local disable_filetypes = {}
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
         end
@@ -78,6 +78,8 @@ return {
         htmldjango = { 'prettierd', 'prettier', stop_after_first = true },
         html = { 'prettierd', 'prettier', stop_after_first = true },
         sh = { 'shfmt' },
+        cpp = { 'clang-format' },
+        c = { 'clang-format' },
       },
       formatters = {
         isort = {
