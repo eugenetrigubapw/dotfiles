@@ -21,7 +21,7 @@ return {
       require('CopilotChat').setup {
         model = 'claude-3.5-sonnet',
       }
-      vim.keymap.set('n', '<leader>cc', function()
+      vim.keymap.set('n', '<leader>tc', function()
         vim.cmd 'CopilotChatToggle'
       end, { desc = '[Copilot] Toggle Copilot Chat' })
     end,
