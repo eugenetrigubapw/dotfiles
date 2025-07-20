@@ -6,6 +6,7 @@ export GOBIN="$SRC_DIR/go/bin"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$GOBIN:$PATH"
+export GOPROXY="direct"
 
 # Python
 export PYENV_ROOT="$HOME/.pyenv"
