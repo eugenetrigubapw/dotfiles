@@ -1,3 +1,5 @@
 .DS_Store
 /tags
 /tmux/.config/tmux/plugins
+/msmtp/.config/msmtp/*.log
+

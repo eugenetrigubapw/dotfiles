@@ -1,0 +1,23 @@
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/cert.pem
+logfile        ~/.config/msmtp/msmtp.log
+
+account        gmail
+host           smtp.gmail.com
+port           587
+from           eugenetriguba@gmail.com
+user           eugenetriguba@gmail.com
+passwordeval   get-password --credential 'Personal Gmail Password'
+
+account        icloud
+host           smtp.mail.me.com
+port           587
+from           hello@eugenetriguba.com
+#user           eugenetriguba@gmail.com
+user           eugenetriguba@icloud.com
+passwordeval   get-password --credential 'Personal iCloud Password'
+set_from_header on
+
+account default : icloud
