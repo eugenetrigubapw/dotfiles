@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
-export HISTFILE=~/.zhistory
-export HISTSIZE=100000
-export SAVEHIST=100000
+eval "$(atuin init zsh)"
+
+# Disable zsh default history
+unset HISTFILE
+HISTSIZE=0
+SAVEHIST=0
