@@ -25,6 +25,7 @@ main() {
   stow gpg
   stow tmux
   stow ghostty
+  stow aerc
   echo "Successfully linked all dotfiles."
 
   echo "Initializing TPM (Tmux Plugin Manager)..."
