@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
 
-eval "$(atuin init zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
 
-# Disable zsh default history
-unset HISTFILE
-HISTSIZE=0
-SAVEHIST=0
+export HISTFILE=~/.zhistory
+export HISTSIZE=100000
+export SAVEHIST=100000
