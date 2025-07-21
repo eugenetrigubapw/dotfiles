@@ -8,7 +8,7 @@ return {
       lint.linters_by_ft['cpp'] = { 'cppcheck' }
       lint.linters_by_ft['dockerfile'] = { 'hadolint' }
       lint.linters_by_ft['json'] = { 'jsonlint' }
-      lint.linters_by_ft['terraform'] = { 'tflint' }
+      lint.linters_by_ft['terraform'] = { 'tflint', 'terraform_validate' }
       lint.linters_by_ft['python'] = { 'ruff', 'bandit' }
       lint.linters_by_ft['markdown'] = nil
       lint.linters_by_ft['text'] = nil
