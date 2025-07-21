@@ -25,7 +25,10 @@ main() {
   stow gpg
   stow tmux
   stow ghostty
+  stow atuin
   echo "Successfully linked all dotfiles."
+
+  mkdir -p ~/bin/ ~/src/
 
   echo "Initializing TPM (Tmux Plugin Manager)..."
   setup_tpm
