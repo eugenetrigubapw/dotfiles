@@ -195,6 +195,7 @@ return {
         stylua = {},
         tailwindcss = {},
         mesonlsp = {},
+        terraformls = {},
       }
 
       -- Ensure the servers and tools above are installed
