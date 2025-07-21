@@ -32,10 +32,10 @@ main() {
   echo "Successfully linked all dotfiles."
 
   mkdir -p ~/Mail/Gmail/INBOX ~/Mail/iCloud/INBOX ~/bin/ ~/src/
-  sudo ln -s "$HOME/bin/get-password" /usr/local/bin/get-password
-  sudo ln -s "$(which op)" /usr/local/bin/op
-  sudo ln -s "$HOME/bin/msmtp-send" /usr/local/bin/msmtp-send
-  sudo ln -s "$HOME/bin/msmtp-queue" /usr/local/bin/msmtp-queue
+  sudo ln -sf "$HOME/bin/get-password" /usr/local/bin/get-password
+  sudo ln -sf "$(which op)" /usr/local/bin/op
+  sudo ln -sf "$HOME/bin/msmtp-send" /usr/local/bin/msmtp-send
+  sudo ln -sf "$HOME/bin/msmtp-queue" /usr/local/bin/msmtp-queue
 
   echo "Initializing TPM (Tmux Plugin Manager)..."
   setup_tpm
