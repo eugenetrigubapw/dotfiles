@@ -26,6 +26,7 @@ main() {
   stow tmux
   stow ghostty
   stow atuin
+  stow lazygit
   echo "Successfully linked all dotfiles."
 
   mkdir -p ~/bin/ ~/src/
