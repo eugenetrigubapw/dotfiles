@@ -29,6 +29,7 @@ main() {
   stow isync
   stow msmtp
   stow atuin
+  stow lazygit
   echo "Successfully linked all dotfiles."
 
   mkdir -p ~/Mail/Gmail/INBOX ~/Mail/iCloud/INBOX ~/bin/ ~/src/
