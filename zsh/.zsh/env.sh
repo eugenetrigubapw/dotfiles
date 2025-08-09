@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 export EDITOR="nvim"
-export BROWSER="vivaldi"
+export BROWSER="firefox"
 export GPG_TTY=$(tty)
 export PAGER="less"
 export MANPAGER="less"
