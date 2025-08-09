@@ -92,3 +92,5 @@ opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 opt.inccommand = 'split'
+
+opt.spellfile = vim.fn.stdpath 'config' .. '/spell/en.utf-8.add'
