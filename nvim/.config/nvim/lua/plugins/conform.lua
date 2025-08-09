@@ -80,6 +80,7 @@ return {
         sh = { 'shfmt' },
         cpp = { 'clang-format' },
         c = { 'clang-format' },
+        tf = { 'terraformfmt' },
       },
       formatters = {
         isort = {
