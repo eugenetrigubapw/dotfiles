@@ -1,6 +1,1 @@
-require 'config.global'
-require 'config.keymaps'
-require 'config.autocmds'
-require 'config.options'
-require 'config.filetypes'
-require 'config.lazy'
+require 'eugenetriguba'
