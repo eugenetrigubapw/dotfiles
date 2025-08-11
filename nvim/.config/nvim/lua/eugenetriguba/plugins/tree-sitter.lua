@@ -25,16 +25,14 @@ require('nvim-treesitter.configs').setup {
   textobjects = { enable = true },
 }
 
-vim.api.nvim_create_autocmd('VimEnter', {
-  once = true,
-  callback = function()
-    vim.cmd 'TSUpdate'
-  end,
-})
-
 local nts = require 'nvim-treesitter'
 vim.api.nvim_create_autocmd('PackChanged', {
-  callback = function()
-    nts.update()
+  callback = function(args)
+    local spec = args.data.spec
+    if spec and spec.name == 'nvim-treesitter' and args.data.kind == 'update' then
+      vim.schedule(function()
+        nts.update()
+      end)
+    end
   end,
 })
