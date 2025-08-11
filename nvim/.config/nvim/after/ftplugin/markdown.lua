@@ -7,7 +7,6 @@ opt_local.formatoptions:remove { 'l' }
 opt_local.wrap = true
 opt_local.linebreak = true
 opt_local.breakindent = true
-opt_local.conceallevel = 3
 
 opt_local.spell = true
 opt_local.spelllang = 'en_us'
