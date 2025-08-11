@@ -30,6 +30,7 @@ main() {
   stow msmtp
   stow atuin
   stow lazygit
+  stow starship
   echo "Successfully linked all dotfiles."
 
   mkdir -p ~/Mail/Gmail/INBOX ~/Mail/iCloud/INBOX ~/bin/ ~/src/

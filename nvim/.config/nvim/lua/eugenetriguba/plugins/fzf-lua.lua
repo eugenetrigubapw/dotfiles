@@ -12,11 +12,7 @@ vim.pack.add({
 vim.api.nvim_create_autocmd('VimEnter', {
   once = true,
   callback = function()
-    require('fzf-lua').setup {
-      files = {
-        hidden = true,
-      },
-    }
+    require('fzf-lua').setup {}
     vim.keymap.set('n', '<leader>sh', require('fzf-lua').help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', require('fzf-lua').keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>sf', require('fzf-lua').files, { desc = '[S]earch [F]iles' })
