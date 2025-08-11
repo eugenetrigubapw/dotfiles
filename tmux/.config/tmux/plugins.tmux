@@ -27,7 +27,6 @@ set-option -g @plugin 'christoomey/vim-tmux-navigator'
 
 set-option -g @plugin 'tmux-plugins/tmux-yank'
 set-option -g @plugin 'tmux-plugins/tmux-open'
-set-option -g @plugin 'tmux-plugins/tmux-copycat'
 
 set-option -g @plugin "janoamaral/tokyo-night-tmux"
 set -g @tokyo-night-tmux_theme night

@@ -8,6 +8,9 @@ export PATH="$GOROOT/bin:$PATH"
 export PATH="$GOBIN:$PATH"
 export GOPROXY="direct"
 
+# Rust
+. "$HOME/.cargo/env"
+
 # Python
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"

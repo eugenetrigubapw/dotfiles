@@ -20,6 +20,8 @@ set-option -g pane-base-index 1
 set-window-option -g pane-base-index 1
 set-option -g renumber-windows on
 
+set-option -g status-position top
+
 # Don't do anything when a 'bell' rings
 set-option -g visual-activity off
 set-option -g visual-bell off
