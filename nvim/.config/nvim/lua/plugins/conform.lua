@@ -84,9 +84,6 @@ return {
         isort = {
           prepend_args = { '--profile', 'black' },
         },
-        black = {
-          prepend_args = { '--line-length', '120' },
-        },
         shfmt = {
           args = { '-i', '2' },
         },
