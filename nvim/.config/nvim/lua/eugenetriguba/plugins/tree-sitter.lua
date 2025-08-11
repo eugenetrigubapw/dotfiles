@@ -3,6 +3,10 @@ vim.pack.add {
     name = 'nvim-treesitter',
     src = 'https://github.com/nvim-treesitter/nvim-treesitter',
   },
+  {
+    name = 'nvim-treesitter-context',
+    src = 'https://github.com/nvim-treesitter/nvim-treesitter-context',
+  },
 }
 
 require('nvim-treesitter.configs').setup {
