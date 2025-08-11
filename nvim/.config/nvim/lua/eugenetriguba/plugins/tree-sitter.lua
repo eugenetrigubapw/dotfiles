@@ -31,3 +31,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
     vim.cmd 'TSUpdate'
   end,
 })
+
+local nts = require 'nvim-treesitter'
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function()
+    nts.update()
+  end,
+})
