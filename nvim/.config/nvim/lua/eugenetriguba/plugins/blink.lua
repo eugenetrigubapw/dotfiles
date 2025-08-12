@@ -71,7 +71,7 @@ require('blink.cmp').setup {
 }
 
 vim.api.nvim_create_user_command('BlinkBuild', function()
-  local utils = require 'eugenetirguba.utils'
+  local utils = require 'eugenetriguba.utils'
   local blink_path = vim.fn.stdpath 'data' .. '/site/pack/core/opt/blink.cmp'
   utils.build_with_job({ 'cargo', '+nightly', 'build', '--release' }, blink_path, 'blink.cmp')
 end, { desc = 'Build blink.cmp' })
@@ -81,7 +81,7 @@ vim.api.nvim_create_user_command('LuaSnipBuild', function()
     vim.notify 'LuaSnip build not supported on this system'
     return
   end
-  local utils = require 'eugenetirguba.utils'
+  local utils = require 'eugenetriguba.utils'
   local luasnip_path = vim.fn.stdpath 'data' .. '/site/pack/core/opt/LuaSnip'
   utils.build_with_job({ 'make', 'install_jsregexp' }, luasnip_path, 'LuaSnip')
 end, { desc = 'Build LuaSnip jsregexp' })
