@@ -18,3 +18,7 @@ map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Keybindings to cycle through open tabs easier
+map('n', '<M-,>', '<cmd>tabprevious<CR>', { desc = 'Open tab to the left' })
+map('n', '<M-.>', '<cmd>tabnext<CR>', { desc = 'Open tab to the right' })

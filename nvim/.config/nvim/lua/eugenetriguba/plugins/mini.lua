@@ -6,6 +6,8 @@ vim.pack.add {
 }
 
 require('mini.pairs').setup()
+require('mini.git').setup()
+require('mini.tabline').setup()
 
 -- Better Around/Inside textobjects
 --
