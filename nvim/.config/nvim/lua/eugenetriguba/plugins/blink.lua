@@ -95,6 +95,17 @@ vim.api.nvim_create_user_command('BlinkBuild', function()
   build_with_job({ 'cargo', '+nightly', 'build', '--release' }, blink_path, 'blink.cmp')
 end, { desc = 'Build blink.cmp' })
 
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(args)
+    local spec = args.data.spec
+    if spec and spec.name == 'blink.cmp' and args.data.kind == 'update' then
+      vim.schedule(function()
+        vim.cmd 'BlinkBuild'
+      end)
+    end
+  end,
+})
+
 vim.api.nvim_create_user_command('LuaSnipBuild', function()
   if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
     vim.notify 'LuaSnip build not supported on this system'
@@ -103,3 +114,14 @@ vim.api.nvim_create_user_command('LuaSnipBuild', function()
   local luasnip_path = vim.fn.stdpath 'data' .. '/site/pack/core/opt/LuaSnip'
   build_with_job({ 'make', 'install_jsregexp' }, luasnip_path, 'LuaSnip')
 end, { desc = 'Build LuaSnip jsregexp' })
+
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(args)
+    local spec = args.data.spec
+    if spec and spec.name == 'blink.cmp' and args.data.kind == 'update' then
+      vim.schedule(function()
+        vim.cmd 'LuaSnipBuild'
+      end)
+    end
+  end,
+})

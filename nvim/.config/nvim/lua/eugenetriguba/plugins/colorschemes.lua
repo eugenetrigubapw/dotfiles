@@ -5,7 +5,6 @@ vim.pack.add {
   },
 }
 
-
 require('tokyonight').setup {
   styles = {
     comments = { italic = false },
