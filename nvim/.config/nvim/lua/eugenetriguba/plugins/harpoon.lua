@@ -1,18 +1,8 @@
-vim.pack.add({
-  {
-    name = 'harpoon',
-    src = 'https://github.com/ThePrimeagen/harpoon',
-    version = 'harpoon2',
-  },
-  {
-    name = 'plenary',
-    src = 'https://github.com/nvim-lua/plenary.nvim',
-  },
-}, { load = false })
-
-vim.api.nvim_create_autocmd('VimEnter', {
-  once = true,
-  callback = function()
+return {
+  'https://github.com/ThePrimeagen/harpoon',
+  branch = 'harpoon2',
+  dependencies = { 'https://github.com/nvim-lua/plenary.nvim' },
+  config = function()
     local harpoon = require 'harpoon'
     harpoon:setup()
 
@@ -47,4 +37,4 @@ vim.api.nvim_create_autocmd('VimEnter', {
       harpoon:list():next()
     end)
   end,
-})
+}
