@@ -43,7 +43,7 @@
 # resize-overlay-duration = 4s 200ms
 theme = "tokyonight"
 font-family = "Hack"
-font-size = 14
+font-size = 16
 
 keybind = global:cmd+shift+t=toggle_quick_terminal
 quick-terminal-autohide = false

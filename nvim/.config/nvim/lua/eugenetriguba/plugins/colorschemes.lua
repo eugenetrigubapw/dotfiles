@@ -1,13 +1,14 @@
-vim.pack.add {
+return {
   {
-    name = 'tokyonight',
-    src = 'https://github.com/folke/tokyonight.nvim',
+    'folke/tokyonight.nvim',
+    priority = 1000,
+    config = function()
+      require('tokyonight').setup {
+        styles = {
+          comments = { italic = false },
+        },
+      }
+      vim.cmd.colorscheme 'tokyonight'
+    end,
   },
 }
-
-require('tokyonight').setup {
-  styles = {
-    comments = { italic = false },
-  },
-}
-vim.cmd.colorscheme 'tokyonight'

@@ -1,5 +1,8 @@
 local map = vim.keymap.set
 
+map('n', '<leader>sh', ':split<CR>')
+map('n', '<leader>sv', ':vsplit<CR>')
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
@@ -19,6 +22,13 @@ map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Keybindings to cycle through open buffers easier
-map('n', '<M-,>', '<cmd>bprev<CR>', { desc = 'Open buffer to the left' })
-map('n', '<M-.>', '<cmd>bnext<CR>', { desc = 'Open buffer to the right' })
+local function confirm_and_delete_buffer()
+  local confirm = vim.fn.confirm('Delete buffer and file?', '&Y\n&N', 2)
+
+  if confirm == 1 then
+    os.remove(vim.fn.expand '%')
+    vim.api.nvim_buf_delete(0, { force = true })
+  end
+end
+
+map('n', '<leader>df', confirm_and_delete_buffer)

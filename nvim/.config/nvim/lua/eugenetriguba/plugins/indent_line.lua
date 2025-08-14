@@ -1,8 +1,7 @@
-vim.pack.add {
+return {
   {
-    name = 'indent-blankline',
-    src = 'https://github.com/lukas-reineke/indent-blankline.nvim',
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {},
   },
 }
-
-require('ibl').setup()
