@@ -36,6 +36,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
       harpoon:list():select(4)
     end)
 
+    vim.keymap.set('n', '<C-x>', function()
+      harpoon:list():clear()
+    end, { desc = 'Clear Harpoon list' })
+
     vim.keymap.set('n', '<leader>hp', function()
       harpoon:list():prev()
     end)

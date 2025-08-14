@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
         sh = { 'shfmt' },
         cpp = { 'clang-format' },
         c = { 'clang-format' },
-        tf = { 'terraformfmt' },
+        tf = { 'terraform_fmt' },
       },
       formatters = {
         isort = {
