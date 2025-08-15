@@ -12,6 +12,7 @@ return {
   },
   {
     'https://github.com/CopilotC-Nvim/CopilotChat.nvim',
+    event = 'VeryLazy',
     dependencies = {
       { 'https://github.com/zbirenbaum/copilot.lua' },
       { 'https://github.com/nvim-lua/plenary.nvim', branch = 'master' },

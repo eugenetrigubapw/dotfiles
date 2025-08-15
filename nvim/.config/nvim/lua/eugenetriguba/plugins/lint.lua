@@ -30,7 +30,6 @@ return {
       lint.linters_by_ft['markdown'] = nil
       lint.linters_by_ft['text'] = nil
       lint.linters_by_ft['sh'] = { 'shellcheck' }
-      lint.linters.shellcheck.args = { '-x' }
 
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
       vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {

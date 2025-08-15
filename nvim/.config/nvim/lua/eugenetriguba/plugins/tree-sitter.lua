@@ -12,7 +12,6 @@ return {
         enable = true,
         additional_vim_regex_highlighting = { 'ruby', 'cpp' },
       },
-      indent = { enable = true, disable = { 'ruby', 'cpp' } },
       incremental_selection = { enable = true },
       context_commentstring = { enable = true },
       textobjects = { enable = true },
