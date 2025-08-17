@@ -1,0 +1,21 @@
+#!/bin/sh
+
+main() {
+  source_img_path="$1"
+  if [ -z "$source_img_path" ]; then
+    print_usage
+    exit 1
+  fi
+  result_img_path="$2"
+  if [ -z "$result_img_path" ]; then
+    result_img_path="$source_img_path"
+  fi
+
+  magick "$source_img_path" -strip -interlace Plane -gaussian-blur 0.05 -quality 85% "$result_img_path"
+}
+
+print_usage() {
+  echo "Usage: $0 <source-img-path> [result-img-path]"
+}
+
+main "$@"
