@@ -10,7 +10,7 @@ main() {
 
   original_size=$(get_file_size "$source_img_path")
   echo "Optimizing: $source_img_path -> $result_img_path (quality: $quality%)"
-  magick "$source_img_path" -strip -quality 85% "$result_img_path"
+  magick "$source_img_path" -strip -quality "${quality}%" "$result_img_path"
   new_size=$(get_file_size "$result_img_path")
   echo "File size: $original_size -> $new_size"
 }
