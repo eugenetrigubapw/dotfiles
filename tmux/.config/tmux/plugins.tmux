@@ -42,6 +42,6 @@ set -g @tokyo-night-tmux_date_format YMD
 set -g @tokyo-night-tmux_time_format 24H
 set -g @tokyo-night-tmux_show_git 0
 
-set -g @plugin 'git.sr.ht/~eugenetriguba/tmux-toggle-term'
+set -g @plugin 'https://git.sr.ht/~eugenetriguba/tmux-toggle-term'
 
 run '$HOME/.config/tmux/plugins/tpm/tpm'
