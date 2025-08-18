@@ -69,6 +69,8 @@ return {
         python = { 'black', 'isort' },
         rust = { 'rustfmt' },
         sh = { 'shfmt' },
+        yaml = { 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'prettierd', 'prettier', stop_after_first = true },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
@@ -77,6 +79,7 @@ return {
         htmldjango = { 'prettierd', 'prettier', stop_after_first = true },
         html = { 'prettierd', 'prettier', stop_after_first = true },
         tf = { 'terraform_fmt' },
+        nix = { 'nixfmt' },
       },
       formatters = {
         isort = {

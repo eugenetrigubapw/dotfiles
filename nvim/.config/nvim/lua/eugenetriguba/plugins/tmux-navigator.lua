@@ -1,6 +1,6 @@
 return {
-  'christoomey/vim-tmux-navigator',
-  lazy = false,
+  'https://github.com/christoomey/vim-tmux-navigator',
+  event = 'VeryLazy',
   cmd = {
     'TmuxNavigateLeft',
     'TmuxNavigateDown',

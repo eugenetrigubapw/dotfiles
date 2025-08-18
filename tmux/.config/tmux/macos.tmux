@@ -1,7 +1,6 @@
 # Related: [issue #67](https://github.com/tmux-plugins/tpm/issues/67)
 set-environment -g PATH "/opt/homebrew/bin:/bin:/usr/bin"
 
-# Setting the namespace
 set -g default-command "reattach-to-user-namespace -l /bin/zsh"
 
 # Prefix C-c copy buffer to system clipboard

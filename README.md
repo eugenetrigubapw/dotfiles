@@ -2,7 +2,7 @@
 
 Configuration files and scripts for my macOS development environment.
 
-![Screenshot of Development Environment](./screenshots/overview.png)
+![Screenshot of Development Environment](./screenshots/overview.webp)
 
 ## What's Included
 

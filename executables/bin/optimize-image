@@ -1,0 +1,83 @@
+#!/bin/sh
+set -e
+
+quality=85
+source_img_path=""
+result_img_path=""
+
+main() {
+  parse_args "$@"
+
+  original_size=$(get_file_size "$source_img_path")
+  echo "Optimizing: $source_img_path -> $result_img_path (quality: $quality%)"
+  magick "$source_img_path" -strip -quality "${quality}%" "$result_img_path"
+  new_size=$(get_file_size "$result_img_path")
+  echo "File size: $original_size -> $new_size"
+}
+
+parse_args() {
+  while [ $# -gt 0 ]; do
+    case $1 in
+    --quality)
+      if [ -n "$2" ] && [ "$2" -ge 1 ] && [ "$2" -le 100 ] 2>/dev/null; then
+        quality="$2"
+        shift 2
+      else
+        echo "Error: --quality requires a number between 1 and 100"
+        exit 1
+      fi
+      ;;
+    -h | --help)
+      print_usage
+      exit 0
+      ;;
+    -*)
+      echo "Error: Unknown option $1"
+      print_usage
+      exit 1
+      ;;
+    *)
+      if [ -z "$source_img_path" ]; then
+        source_img_path="$1"
+      else
+        echo "Error: Too many arguments"
+        print_usage
+        exit 1
+      fi
+      shift
+      ;;
+    esac
+  done
+
+  if [ -z "$source_img_path" ]; then
+    echo "Error: source image path is required"
+    print_usage
+    exit 1
+  fi
+
+  if [ ! -f "$source_img_path" ]; then
+    echo "Error: Source file '$source_img_path' does not exist"
+    exit 1
+  fi
+
+  result_img_path="${source_img_path%.*}.webp"
+}
+
+print_usage() {
+  echo "Usage: $0 [OPTIONS] <source-img-path>"
+  echo ""
+  echo "Options:"
+  echo "  --quality <value>    Set quality (1-100, default: 85)"
+  echo "  -h, --help           Show this help message"
+  echo ""
+  echo "Examples:"
+  echo "  $0 input.jpg"
+  echo "  $0 --quality 90 input.jpg"
+  echo "  $0 --quality 80 input.png"
+}
+
+get_file_size() {
+  du -h "$1" | awk '{ print $1 }'
+}
+
+main "$@"

@@ -8,16 +8,12 @@ bind-key C-a send-prefix
 # Remap pane splits to something more sane than the default.
 # 
 # Split panes using | for horizontal splits and - for vertical splits
-bind-key | split-window -h
-bind-key - split-window -v
+bind-key | split-window -h -c "#{pane_current_path}"
+bind-key - split-window -v -c "#{pane_current_path}"
 unbind '"'
 unbind %
+bind-key c new-window -c "#{pane_current_path}"
 
 # Easier configuration reloading and pane killing
 bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded!"
 bind-key x kill-pane
-
-# Add key bindings for toggling terminal windows
-bind-key -n 'C-;' run-shell -b "${HOME}/bin/tmux-toggle-term"
-bind-key -n 'C-f' run-shell -b "${HOME}/bin/tmux-toggle-term float"
-
