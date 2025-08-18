@@ -41,6 +41,7 @@ set-option -g @tokyo-night-tmux_show_datetime 1
 set-option -g @tokyo-night-tmux_date_format YMD
 set-option -g @tokyo-night-tmux_time_format 24H
 set-option -g @tokyo-night-tmux_show_git 0
+set-option -g @tokyo-night-tmux_show_wbg 0
 
 set-option -g @plugin 'https://git.sr.ht/~eugenetriguba/tmux-toggle-term'
 
