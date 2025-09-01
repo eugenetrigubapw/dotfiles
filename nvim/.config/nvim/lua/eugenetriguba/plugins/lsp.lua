@@ -131,6 +131,56 @@ return {
         tailwindcss = {},
         mesonlsp = {},
         terraformls = {},
+        jdtls = {
+          settings = {
+            java = {
+              configuration = {
+                updateBuildConfiguration = 'interactive',
+              },
+              completion = {
+                favoriteStaticMembers = {
+                  'org.hamcrest.MatcherAssert.assertThat',
+                  'org.hamcrest.Matchers.*',
+                  'org.hamcrest.CoreMatchers.*',
+                  'org.junit.jupiter.api.Assertions.*',
+                  'java.util.Objects.requireNonNull',
+                  'java.util.Objects.requireNonNullElse',
+                },
+              },
+              contentProvider = { preferred = 'fernflower' },
+              eclipse = {
+                downloadSources = true,
+              },
+              implementationsCodeLens = {
+                enabled = true,
+              },
+              inlayHints = {
+                parameterNames = {
+                  enabled = 'all', -- literals, all, none
+                },
+              },
+              maven = {
+                downloadSources = true,
+              },
+              referencesCodeLens = {
+                enabled = true,
+              },
+              references = {
+                includeDecompiledSources = true,
+              },
+              saveActions = {
+                organizeImports = true,
+              },
+              signatureHelp = { enabled = true },
+              sources = {
+                organizeImports = {
+                  starThreshold = 9999,
+                  staticStarThreshold = 9999,
+                },
+              },
+            },
+          },
+        },
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})

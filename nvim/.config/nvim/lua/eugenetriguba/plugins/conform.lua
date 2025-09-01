@@ -82,6 +82,7 @@ return {
         html = { 'prettierd', 'prettier', stop_after_first = true },
         tf = { 'terraform_fmt' },
         nix = { 'nixfmt' },
+        java = { 'google-java-format' },
       },
       formatters = {
         isort = {
