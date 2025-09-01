@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/sh
+set -e
 
 echo "Installing Brewfile.."
 brew bundle install --file=./Brewfile

@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 # Install the Homebrew Brewfile and setup symbolic links to the
 # dotfiles.
-set -eou pipefail
+set -e
 
 main() {
   if ! command -v brew >/dev/null 2>&1; then
@@ -53,7 +53,7 @@ main() {
 prompt_for_confirmation() {
   printf "%s [y/n]: " "$1"
   read -r answer
-  if [[ "$answer" != "${answer#[Yy]}" ]]; then
+  if [ "$answer" != "${answer#[Yy]}" ]; then
     return 0
   else
     return 1
@@ -78,8 +78,8 @@ install_homebrew() {
 }
 
 setup_tpm() {
-  local tpm_dir="$HOME/.config/tpm/plugins/tpm"
-  if [[ ! -d "$tpm_dir" ]]; then
+  tpm_dir="$HOME/.config/tpm/plugins/tpm"
+  if [ ! -d "$tpm_dir" ]; then
     echo "Cloning TPM..."
     git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
   else
