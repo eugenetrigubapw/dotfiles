@@ -14,14 +14,7 @@ return {
           end
           return 'make install_jsregexp'
         end)(),
-        dependencies = {
-          {
-            'rafamadriz/friendly-snippets',
-            config = function()
-              require('luasnip.loaders.from_vscode').lazy_load()
-            end,
-          },
-        },
+        dependencies = {},
         opts = {},
       },
       'https://github.com/folke/lazydev.nvim',

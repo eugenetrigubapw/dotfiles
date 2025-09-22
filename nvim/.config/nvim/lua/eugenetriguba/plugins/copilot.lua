@@ -20,7 +20,7 @@ return {
     build = 'make tiktoken',
     config = function()
       require('CopilotChat').setup {
-        model = 'claude-3.5-sonnet',
+        model = 'claude-sonnet-4',
         vim.keymap.set('n', '<leader>tc', function()
           vim.cmd 'CopilotChatToggle'
         end, { desc = '[T]oggle [C]opilot Chat' }),
