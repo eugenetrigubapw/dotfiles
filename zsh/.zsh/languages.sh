@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+# Homebrew
+eval "$(brew shellenv)"
+export LDFLAGS="-L/opt/homebrew/lib"
+export CPPFLAGS="-I/opt/homebrew/include"
+export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+
 # Go
 export GOPATH="$SRC_DIR/go"
 export GOBIN="$SRC_DIR/go/bin"
@@ -22,6 +28,9 @@ source "$HOME/.cargo/env"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+# Java
+export JAVA_HOME=$(/usr/libexec/java_home -v 24)
+
 # PNPM
 export PNPM_HOME="/Users/eugene/Library/pnpm"
 case ":$PATH:" in
@@ -29,8 +38,3 @@ case ":$PATH:" in
 *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-# Homebrew
-eval "$(brew shellenv)"
-export LDFLAGS="-L/opt/homebrew/lib"
-export CPPFLAGS="-I/opt/homebrew/include"
-export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
