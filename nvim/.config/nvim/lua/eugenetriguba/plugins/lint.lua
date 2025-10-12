@@ -21,6 +21,24 @@ return {
       -- lint.linters_by_ft['clojure'] = nil
 
       local lint = require 'lint'
+
+      local pattern = '[^:]+:(%d+): [^:]+: (.*)'
+      local groups = { 'lnum', 'message' }
+      local severities = nil
+      lint.linters.xmllint = {
+        name = 'xmllint',
+        cmd = 'xmllint',
+        stream = 'stderr',
+        args = { '--noout' },
+        stdin = false,
+        append_fname = true,
+        ignore_exitcode = true,
+        parser = require('lint.parser').from_pattern(pattern, groups, severities, {
+          source = 'xmllint',
+          severity = vim.diagnostic.severity.ERROR,
+        }),
+      }
+
       lint.linters_by_ft = lint.linters_by_ft or {}
       lint.linters_by_ft['cpp'] = { 'cppcheck' }
       lint.linters_by_ft['dockerfile'] = { 'hadolint' }
@@ -29,6 +47,7 @@ return {
       lint.linters_by_ft['python'] = { 'ruff', 'bandit' }
       lint.linters_by_ft['markdown'] = nil
       lint.linters_by_ft['text'] = nil
+      lint.linters_by_ft['xml'] = { 'xmllint' }
       lint.linters_by_ft['sh'] = { 'shellcheck' }
       table.insert(lint.linters.shellcheck.args, '-x')
 
