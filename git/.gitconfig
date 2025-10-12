@@ -9,6 +9,7 @@
 [pull]
 	ff = only
 [fetch]
+	autoSetupRemote = true
 	prune = true
 [diff]
 	colorMoved = zebra
