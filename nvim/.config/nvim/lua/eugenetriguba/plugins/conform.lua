@@ -71,6 +71,7 @@ return {
         python = { 'black', 'isort' },
         rust = { 'rustfmt' },
         sh = { 'shfmt' },
+        xml = { 'xmlformatter' },
         yaml = { 'prettierd', 'prettier', stop_after_first = true },
         json = { 'prettierd', 'prettier', stop_after_first = true },
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
@@ -88,8 +89,16 @@ return {
         isort = {
           prepend_args = { '--profile', 'black' },
         },
-        shfmt = {
-          args = { '-i', '2' },
+        xmlformatter = {
+          command = function()
+            local python_path = vim.g.python3_host_prog
+            if python_path and python_path ~= '' then
+              local venv_bin = vim.fn.fnamemodify(python_path, ':h')
+              return venv_bin .. '/xmlformat'
+            end
+            return 'xmlformat'
+          end,
+          prepend_args = { '--blanks' },
         },
       },
     },

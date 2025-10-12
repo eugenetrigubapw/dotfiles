@@ -1,0 +1,7 @@
+# pynvim
+greenlet==3.2.4
+msgpack==1.1.1
+pynvim==0.6.0
+
+# xmlformatter
+xmlformatter==0.2.8
