@@ -131,11 +131,13 @@ return {
         tailwindcss = {},
         mesonlsp = {},
         terraformls = {},
+        bashls = {},
         jdtls = {
           settings = {
             java = {
               configuration = {
                 updateBuildConfiguration = 'interactive',
+                refreshBundles = true,
               },
               completion = {
                 favoriteStaticMembers = {
