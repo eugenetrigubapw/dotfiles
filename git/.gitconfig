@@ -20,4 +20,14 @@
 	gpgsign = true
 [gpg]
 	program = gpg
-
+[sendemail]
+	smtpserver = smtp.mail.me.com
+	smtpserverport = 587
+	smtpencryption = tls
+	smtpuser = hello@eugenetriguba.com
+	confirm = auto
+	annotate = yes
+	chainreplyto = false
+	thread = yes
+[credential]
+	helper = osxkeychain
