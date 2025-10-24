@@ -21,13 +21,11 @@
 [gpg]
 	program = gpg
 [sendemail]
-	smtpserver = smtp.mail.me.com
-	smtpserverport = 587
-	smtpencryption = tls
-	smtpuser = hello@eugenetriguba.com
+	sendmailCmd = /opt/homebrew/bin/msmtp -a icloud
 	confirm = auto
 	annotate = yes
 	chainreplyto = false
 	thread = yes
+	suppresscc = self
 [credential]
 	helper = osxkeychain
