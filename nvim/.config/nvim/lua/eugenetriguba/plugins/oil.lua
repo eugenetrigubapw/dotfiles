@@ -10,6 +10,7 @@ return {
     require('oil').setup {
       keymaps = {
         ['<C-l>'] = false,
+        ['<C-h>'] = false,
         ['<C-r>'] = 'actions.refresh',
       },
     }
