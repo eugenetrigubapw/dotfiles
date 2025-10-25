@@ -6,6 +6,6 @@ source ~/.zsh/completion.sh
 source ~/.zsh/history.sh
 
 source ~/.zsh/env.sh
-source ~/.zsh/path.sh
 source ~/.zsh/languages.sh
+source ~/.zsh/path.sh
 source ~/.zsh/aliases.sh
