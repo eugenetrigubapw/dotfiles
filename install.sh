@@ -1,22 +1,26 @@
 #!/bin/sh
-#
-# Install the Homebrew Brewfile and setup symbolic links to the
-# dotfiles.
 set -e
 
-main() {
-  if ! command -v brew >/dev/null 2>&1; then
-    if prompt_for_confirmation "Homebrew not found. Would you like to install Homebrew?"; then
-      install_homebrew
-    else
-      echo "Exiting, can't continue without Homebrew installed."
-      exit 0
-    fi
-  fi
+. "$(dirname "$0")/shlib/bootstrap.sh"
+. "$(dirname "$0")/shlib/log.sh"
+. "$(dirname "$0")/shlib/os.sh"
+. "$(dirname "$0")/shlib/tmux.sh"
 
-  echo "Found homebrew installation. Installing Brewfile.."
-  (cd homebrew && brew bundle)
-  echo "Brewfile successfully installed. Moving to linking dotfiles.."
+main() {
+  if os_is_macos; then
+    if ! bootstrap_macos; then
+      log_error "Failed to bootstrap install script"
+      exit 1
+    fi
+  elif os_is_linux; then
+    if ! bootstrap_linux; then
+      log_error "Failed to bootstrap install script"
+      exit 1
+    fi
+  else
+    log_error "Unexpected OS: $(os_print)"
+    exit 1
+  fi
 
   stow executables
   stow nvim
@@ -30,81 +34,16 @@ main() {
   stow msmtp
   stow atuin
   stow lazygit
-  echo "Successfully linked all dotfiles."
+  log_success "Successfully linked all dotfiles."
 
   mkdir -p ~/Mail/Gmail/INBOX ~/Mail/iCloud/INBOX ~/bin/ ~/src/
-  sudo ln -sf "$HOME/bin/get-password" /usr/local/bin/get-password
-  sudo ln -sf "$(which op)" /usr/local/bin/op
 
-  echo "Initializing TPM (Tmux Plugin Manager)..."
-  setup_tpm
-
-  echo "Setup complete!"
-}
-
-# Prompt the user for confirmation on an action.
-#
-# Args:
-#   $1: The question to prompt for. Answer choices
-#      will be added onto the end.
-#
-# Returns:
-#   0 on yes. 1 on no.
-prompt_for_confirmation() {
-  printf "%s [y/n]: " "$1"
-  read -r answer
-  if [ "$answer" != "${answer#[Yy]}" ]; then
-    return 0
-  else
-    return 1
-  fi
-}
-
-# Installs homebrew and verifies the installation.
-#
-# If the install was not successful, exits with a
-# 1 status code.
-install_homebrew() {
-  /usr/bin/env bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  # shellcheck disable=SC2016
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>"$HOME/.zprofile"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-
-  if ! command -v brew >/dev/null 2>&1; then
-    echo "Failed to install homebrew"
+  log_info "Initializing TPM (Tmux Plugin Manager)..."
+  if ! tmux_setup_tpm; then
+    log_error "Failed to setup tpm"
     exit 1
   fi
+  log_success "Setup complete!"
 }
 
-setup_tpm() {
-  tpm_dir="$HOME/.config/tpm/plugins/tpm"
-  if [ ! -d "$tpm_dir" ]; then
-    echo "Cloning TPM..."
-    git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
-  else
-    echo "TPM already exists, updating..."
-    (cd "$tpm_dir" && git pull)
-  fi
-
-  if command -v tmux >/dev/null 2>&1; then
-    echo "Installing tmux plugins..."
-    # Start a tmux server in the background and install plugins
-    tmux start-server
-    tmux new-session -d -s tpm_install
-    tmux send-keys -t tpm_install "$tpm_dir/scripts/install_plugins.sh" Enter
-
-    # Wait a moment for plugins to install
-    sleep 3
-
-    # Kill the temporary session
-    tmux kill-session -t tpm_install 2>/dev/null || true
-
-    echo "TPM plugins installed successfully."
-  else
-    echo "Warning: tmux not found. TPM cloned but plugins not installed."
-    echo "Run 'tmux' and then press 'prefix + I' to install plugins manually."
-  fi
-}
-
-main
+main "$@"
