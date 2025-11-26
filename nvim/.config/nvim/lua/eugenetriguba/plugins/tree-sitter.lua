@@ -7,7 +7,7 @@ return {
     opts = {
       ensure_installed = 'all',
       auto_install = true,
-      ignore_install = { 'norg', 'org', 'ipkg' }, -- Issues installing them, unused anyway.
+      ignore_install = { 'norg', 'org', 'ipkg', 'verilog'  },
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = { 'ruby', 'cpp' },
