@@ -55,7 +55,7 @@ return {
         end
 
         -- Disable "format_on_save lsp_fallback" for certain languages.
-        local disable_filetypes = { sql = true, c = true, cpp = true }
+        local disable_filetypes = { sql = true }
         if disable_filetypes[vim.bo[bufnr].filetype] then
           return nil
         end
@@ -66,6 +66,7 @@ return {
         }
       end,
       formatters_by_ft = {
+        c = { 'clang-format' },
         lua = { 'stylua' },
         go = { 'gofmt' },
         python = { 'black', 'isort' },
