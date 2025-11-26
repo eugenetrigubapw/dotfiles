@@ -37,4 +37,4 @@ set -ga terminal-overrides ",*256col*:Tc"
 set -ga terminal-overrides ",tmux-256color:Tc"
 
 set -g default-terminal "tmux-256color"
-set -g default-shell /bin/zsh
+set -g default-shell $SHELL
