@@ -67,7 +67,7 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        go = { 'goimports', 'gofmt' },
+        go = { 'gofmt' },
         python = { 'black', 'isort' },
         rust = { 'rustfmt' },
         sh = { 'shfmt' },
