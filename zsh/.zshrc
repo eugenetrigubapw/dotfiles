@@ -49,10 +49,61 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 #
+# Language setup
+#
+export GOPATH="$SRC_DIR/go"
+export GOBIN="$SRC_DIR/go/bin"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$GOBIN:$PATH"
+export GOPROXY="direct"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv &> /dev/null; then
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
+
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
+
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+fi
+
+#
 # Append additional directories onto PATH
 #
-PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:$HOME/bin:$HOME/.local/bin;
-export PATH
+export PATH="$BIN_DIR:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+
+#
+# macOS
+#
+if [ $(uname) = "Darwin" ]; then
+  # Homebrew
+  eval "$(brew shellenv)"
+  export LDFLAGS="-L/opt/homebrew/lib"
+  export CPPFLAGS="-I/opt/homebrew/include"
+  export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+
+  export JAVA_HOME=$(/usr/libexec/java_home -v 24)
+  export PATH="/opt/homebrew/opt/openjdk@24/bin:$PATH"
+  export CPPFLAGS="-I/opt/homebrew/opt/openjdk@24/include"
+
+  export PNPM_HOME="/Users/eugene/Library/pnpm"
+  case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
+
+  export PATH="$HOME/.poetry/bin:$PATH"
+  export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+fi
 
 #
 # Aliases
@@ -77,21 +128,3 @@ alias l="ls -alG"
 
 alias vi="nvim"
 alias vim="nvim"
-
-#
-# Language setup
-#
-export GOPATH="$SRC_DIR/go"
-export GOBIN="$SRC_DIR/go/bin"
-export PATH="$GOPATH/bin:$PATH"
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$GOBIN:$PATH"
-export GOPROXY="direct"
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-. "$HOME/.cargo/env"
-
