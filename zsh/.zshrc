@@ -53,14 +53,11 @@ export XDG_STATE_HOME="$HOME/.local/state"
 #
 export GOPATH="$SRC_DIR/go"
 export GOBIN="$SRC_DIR/go/bin"
-export PATH="$GOPATH/bin:$PATH"
-export PATH="$GOROOT/bin:$PATH"
 export PATH="$GOBIN:$PATH"
 export GOPROXY="direct"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv &> /dev/null; then
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
 fi
@@ -79,7 +76,6 @@ fi
 #
 export PATH="$BIN_DIR:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
 
 #
 # macOS
@@ -124,7 +120,7 @@ alias gcb="git checkout -b"
 
 alias h="history 25"
 alias j="jobs -l"
-alias l="ls -alG"
+alias l="ls -al"
 
 alias vi="nvim"
 alias vim="nvim"
