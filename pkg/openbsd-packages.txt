@@ -1,0 +1,10 @@
+firefox
+git
+gopls
+neovim
+node
+quirks
+shellcheck
+shfmt
+stow
+zsh

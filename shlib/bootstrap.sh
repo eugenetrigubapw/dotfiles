@@ -17,13 +17,14 @@ bootstrap_macos() {
   fi
 
   log_info "Found homebrew installation. Installing Brewfile.."
-  (cd homebrew && brew bundle)
+  (cd macos/homebrew && brew bundle)
   log_info "Brewfile successfully installed. Moving to linking dotfiles.."
 
   sudo ln -sf "$HOME/bin/get-password" /usr/local/bin/get-password
   sudo ln -sf "$(which op)" /usr/local/bin/op
 }
 
-bootstrap_linux() {
-  return 0
+bootstrap_openbsd() {
+  log_info "Installing OpenBSD packages..."
+  doas pkg_add "$(dirname "$0")/pkg/openbsd-packages.txt" | tr '\n' ' '
 }

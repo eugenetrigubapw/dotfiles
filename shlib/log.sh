@@ -1,5 +1,5 @@
-# shellcheck shell=bash
-[[ -n "${DOTFILES_LOG_LOADED:-}" ]] && return
+# shellcheck shell=sh
+[ -n "${DOTFILES_LOG_LOADED:-}" ] && return
 readonly DOTFILES_LOG_LOADED=1
 
 log_info() {
@@ -19,7 +19,7 @@ log_success() {
 }
 
 log_debug() {
-  [[ "${DEBUG:-}" == "true" ]] && echo "[DEBUG] $*" >&2
+  [ "${DEBUG:-}" == "true" ] && echo "[DEBUG] $*" >&2
 }
 
 log_newline() {
