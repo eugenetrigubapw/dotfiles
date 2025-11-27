@@ -26,5 +26,7 @@ bootstrap_macos() {
 
 bootstrap_openbsd() {
   log_info "Installing OpenBSD packages..."
-  doas pkg_add "$(dirname "$0")/pkg/openbsd-packages.txt" | tr '\n' ' '
+  _openbsd_packages="$(cat "$(dirname "$0")/pkg/openbsd-packages.txt" | tr '\n' ' ')"
+  doas pkg_add $_openbsd_packages
+  chsh -s /usr/local/bin/zsh "$USER"
 }
