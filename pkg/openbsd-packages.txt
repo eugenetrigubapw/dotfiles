@@ -1,8 +1,16 @@
+bash
+chromium
+ffmpeg
 firefox
 git
 gopls
+hack-fonts
+jq
+lemonbar-xft
 neovim
 node
+noto-fonts
+noto-nerd-fonts
 quirks
 shellcheck
 shfmt
