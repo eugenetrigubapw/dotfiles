@@ -25,6 +25,7 @@ main() {
   if os_is_openbsd; then
     stow x
     stow cwm
+    stow kitty
   fi
   stow ssh
   stow executables

@@ -6,6 +6,7 @@ git
 gopls
 hack-fonts
 jq
+kitty
 lemonbar-xft
 neovim
 node

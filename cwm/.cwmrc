@@ -34,7 +34,7 @@ unbind-mouse M-3
 bind-mouse M-3 window-resize
 
 bind-key CM-r reload
-bind-key 4-Return xterm
+bind-key 4-Return kitty
 
 #
 # Options
