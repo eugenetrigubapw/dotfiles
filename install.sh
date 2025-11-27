@@ -26,7 +26,9 @@ main() {
     stow x
     stow cwm
     stow kitty
+    stow lemonbar-xft
   fi
+  stow wallpapers
   stow ssh
   stow executables
   stow nvim
