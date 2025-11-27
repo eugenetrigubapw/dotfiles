@@ -22,6 +22,11 @@ main() {
   if os_is_macos; then
     stow ghostty
   fi
+  if os_is_openbsd; then
+    stow x
+    stow cwm
+  fi
+  stow ssh
   stow executables
   stow nvim
   stow zsh
