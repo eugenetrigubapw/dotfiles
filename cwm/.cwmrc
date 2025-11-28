@@ -37,12 +37,11 @@ bind-key CM-r reload
 bind-key 4-q window-delete
 bind-key 4-Return kitty
 
-autogroup 0 "lemonbar"
-
-#
-# Options
-#
+# Assign new windows to the currently
+# selected group
 sticky yes
+
+snapdist 10
 moveamount 5
 
 ####################
@@ -53,4 +52,4 @@ color menubg   "#32302f"
 color menufg   "#ebdbb2"
 color font     "#ebdbb2"
 color selffont "#32302f"
-gap 32 6 6 6
+gap 26 2 2 2
