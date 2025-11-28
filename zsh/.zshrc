@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+if [ "$(uname)" = "OpenBSD" ]; then
+  . ~/.profile
+fi
+
 #
 # Setup Shell Prompt
 #
@@ -28,8 +32,8 @@ compinit
 # Setup shell history
 #
 export HISTFILE=~/.zhistory
-export HISTSIZE=100000
-export SAVEHIST=100000
+export HISTSIZE=1000000
+export SAVEHIST=1000000
 
 #
 # Setup default env variables
@@ -69,6 +73,10 @@ fi
 if [ -d "$HOME/.nvm" ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+fi
+
+if command -v fzf > /dev/null 2>&1; then
+  eval "$(fzf --zsh)"
 fi
 
 #
