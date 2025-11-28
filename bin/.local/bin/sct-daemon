@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+while true; do
+	hour=$(date +%H)
+
+	if [ "$hour" -ge 6 ] && [ "$hour" -lt 18 ]; then
+		sct 6500 # day
+	elif [ "$hour" -ge 18 ] && [ "$hour" -lt 20 ]; then
+		sct 4500 # evening
+	elif [ "$hour" -ge 20 ] && [ "$hour" -lt 22 ]; then
+		sct 3500 # night
+	else
+		sct 3000 # late night/early morning
+	fi
+
+	sleep 600 # check every 10 minutes
+done

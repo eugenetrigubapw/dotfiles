@@ -24,6 +24,7 @@ main() {
   fi
   if os_is_openbsd; then
     stow x
+    stow feh
     stow cwm
     stow kitty
     stow lemonbar-xft
@@ -31,7 +32,7 @@ main() {
   fi
   stow wallpapers
   stow ssh
-  stow executables
+  stow bin
   stow nvim
   stow zsh
   stow git

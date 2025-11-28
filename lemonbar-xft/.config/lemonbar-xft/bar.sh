@@ -24,6 +24,7 @@ battery() {
   ac_state=$(echo "$apm_output" | head -1)
   percent=$(echo "$apm_output" | sed -n '2p')
   charging=$(echo "$apm_output" | sed -n '4p')
+  minutes=$(apm -m)
 
   if [ "$ac_state" = "4" ]; then
     echo "AC"
@@ -52,7 +53,7 @@ battery() {
     bar="${YELLOW}${bar}${RESET}"
   fi
 
-  printf "%s%% %s" "$percent" "$bar"
+  printf "%s%% %s (%s min)" "$percent" "$bar" "$minutes"
 }
 
 cpu() {
