@@ -1,0 +1,3 @@
+apmd_flags=-A
+ntpd_flags=-s
+vmd_flags=
