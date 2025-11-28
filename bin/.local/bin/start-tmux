@@ -1,4 +1,5 @@
 #!/bin/sh
 set -e
 
-tmux new-session -A -s "$USER"
+tmux new-session -A -s "$USER" -d
+exec tmux attach-session -t "$USER" || true
