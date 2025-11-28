@@ -2,4 +2,5 @@
 /tags
 /tmux/.config/tmux/plugins
 /msmtp/.config/msmtp/*.log
-
+/gpg/.gnupg/*
+!/gpg/.gnupg/gpg-agent.conf
