@@ -6,7 +6,7 @@ xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
 xterm*eightBitInput: false
 xterm*allowBoldFonts: false
 
-Xft.dpi:		100
+Xft.dpi:		120
 Xft.antialias:		true
 Xft.rgba:		rgb
 Xft.hinting:		true
@@ -17,8 +17,8 @@ XTerm*vt100.translation: #override \
     Shift Ctrl <Key> V: insert-selection(ght theme
 
 ! Font Settings
-xterm*faceName: Hack:size=14
-xterm*faceSize: 14
+xterm*faceName: Hack:size=12
+xterm*faceSize: 12
 xterm*renderFont: true
 
 ! Tokyo Night Theme
