@@ -7,7 +7,7 @@ return {
     opts = {
       ensure_installed = 'all',
       auto_install = true,
-      ignore_install = { 'norg', 'org', 'ipkg', 'verilog'  },
+      ignore_install = { 'norg', 'org', 'ipkg', 'verilog' },
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = { 'ruby', 'cpp' },
@@ -19,5 +19,8 @@ return {
   },
   {
     'https://github.com/nvim-treesitter/nvim-treesitter-context',
+    opts = {
+      multiline_threshold = 10,
+    },
   },
 }
