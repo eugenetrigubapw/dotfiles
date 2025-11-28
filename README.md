@@ -8,7 +8,6 @@ Configuration files and scripts for my personal systems.
 
 The repository uses [GNU Stow](https://www.gnu.org/software/stow/) to manage
 symlinks between these configuration files and the user's home directory.
-Homebrew packages are tracked via a Brewfile.
 
 ## Installation
 
