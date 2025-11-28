@@ -1,4 +1,5 @@
 ImageMagick
+ansiweather
 bash
 chafa
 chromium
@@ -15,6 +16,7 @@ hack-fonts
 jq
 kitty
 lemonbar-xft
+lynx
 neovim
 newsboat
 node
@@ -23,6 +25,7 @@ noto-nerd-fonts
 pinentry
 python
 quirks
+sct
 shellcheck
 shfmt
 stow

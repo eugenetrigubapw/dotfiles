@@ -29,6 +29,7 @@ main() {
     stow kitty
     stow lemonbar-xft
     stow newsboat
+    stow ansiweather
   fi
   stow wallpapers
   stow ssh
