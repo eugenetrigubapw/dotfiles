@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+
+tmux new-session -A -s "$USER"
