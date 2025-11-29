@@ -1,3 +1,9 @@
+############################
+# Unbind ALL defaults first
+############################
+unbind-key all
+unbind-mouse all
+
 ####################
 # Key bindings
 #
@@ -12,37 +18,91 @@
 # - 2 = middle
 # - 3 = right
 ####################
-bind-key 4-v  window-vtile
-bind-key 4-h  window-snap-left
-bind-key 4-j  window-snap-down
-bind-key 4-k  window-snap-up
-bind-key 4-l  window-snap-right
 
-# Emulate workspaces with cwm's groups
-bind-key M-1  group-only-1
-bind-key M-2  group-only-2
-bind-key M-3  group-only-3
-bind-key M-4  group-only-4
-bind-key M-5  group-only-5
-bind-key MS-1 window-movetogroup-1
-bind-key MS-2 window-movetogroup-2
-bind-key MS-3 window-movetogroup-3
-bind-key MS-4 window-movetogroup-4
-bind-key MS-5 window-movetogroup-5
-
-unbind-mouse M-3
-bind-mouse M-3 window-resize
-
-bind-key CM-r reload
+# Window management
 bind-key 4-q window-delete
-bind-key 4-Return kitty
+bind-key 4S-q quit
+bind-key 4-f window-fullscreen
+bind-key 4S-space window-stick
+bind-key 4-m window-maximize
 
-# Assign new windows to the currently
-# selected group
+# Tiling/snapping
+bind-key 4-h window-snap-left
+bind-key 4-j window-snap-down
+bind-key 4-k window-snap-up
+bind-key 4-l window-snap-right
+bind-key 4-v window-vtile
+bind-key 4-b window-htile
+
+# Focus movement
+bind-key 4-Tab window-cycle
+bind-key 4S-Tab window-rcycle
+
+# Workspaces
+bind-key 4-1  group-only-1
+bind-key 4-2  group-only-2
+bind-key 4-3  group-only-3
+bind-key 4-4  group-only-4
+bind-key 4-5  group-only-5
+bind-key 4-6  group-only-6
+bind-key 4-7  group-only-7
+bind-key 4-8  group-only-8
+bind-key 4-9  group-only-9
+
+# Move window to workspace
+bind-key 4S-1 window-movetogroup-1
+bind-key 4S-2 window-movetogroup-2
+bind-key 4S-3 window-movetogroup-3
+bind-key 4S-4 window-movetogroup-4
+bind-key 4S-5 window-movetogroup-5
+bind-key 4S-6 window-movetogroup-6
+bind-key 4S-7 window-movetogroup-7
+bind-key 4S-8 window-movetogroup-8
+bind-key 4S-9 window-movetogroup-9
+
+# Applications
+bind-key 4-Return terminal
+bind-key 4-d menu-exec
+bind-key 4-w menu-window
+bind-key 4S-s menu-ssh
+
+# Reload config
+bind-key 4S-r reload
+bind-key 4S-q quit
+
+# Window hiding/unhiding
+bind-key 4-x window-hide
+bind-key 4S-x menu-unhide
+
+# Mouse bindings
+bind-mouse 4-1 window-move
+bind-mouse 4-3 window-resize
+bind-mouse 4S-3 window-lower
+
+####################
+# Window behavior
+####################
+# Assign new windows to the current group
 sticky yes
 
 snapdist 10
 moveamount 5
+
+####################
+# Ignore lemonbar
+#
+# % xprop | grep WM_CLASS
+####################
+ignore Bar
+
+######################
+# Application commands
+######################
+command kitty kitty
+command chrome chrome
+command firefox firefox
+command term kitty
+command browser chrome
 
 ####################
 # Appearance
