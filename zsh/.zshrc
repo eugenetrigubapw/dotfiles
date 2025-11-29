@@ -129,6 +129,3 @@ alias gcb="git checkout -b"
 alias h="history 25"
 alias j="jobs -l"
 alias l="ls -al"
-
-alias vi="nvim"
-alias vim="nvim"
