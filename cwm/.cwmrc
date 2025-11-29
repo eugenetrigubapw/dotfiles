@@ -62,6 +62,7 @@ bind-key 4S-9 window-movetogroup-9
 
 # Applications
 bind-key 4-Return terminal
+bind-key 4-a menu-cmd
 bind-key 4-d menu-exec
 bind-key 4-w menu-window
 bind-key 4S-s menu-ssh
@@ -101,8 +102,9 @@ ignore Bar
 command kitty kitty
 command chrome chrome
 command firefox firefox
-command term kitty
+
 command browser chrome
+command terminal kitty
 
 ####################
 # Appearance
