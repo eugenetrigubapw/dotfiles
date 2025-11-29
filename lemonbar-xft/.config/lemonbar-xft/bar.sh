@@ -11,16 +11,30 @@ main() {
   done
 }
 
+is_laptop() {
+  [ "$(hostname -s)" = "openbsd-laptop" ]
+}
+
 update_bar() {
-  printf "%%{l} %s | %s | %s | %s | %s %%{r} %s | %s | %s \n" \
-    "$(battery)" \
-    "$(temp)" \
-    "$(cpu)" \
-    "$(memory)" \
-    "$(brightness)" \
-    "$(volume)" \
-    "$(wifi)" \
-    "$(datetime)"
+  if is_laptop; then
+    printf "%%{l} %s | %s | %s | %s | %s %%{r} %s | %s | %s \n" \
+      "$(battery)" \
+      "$(temp)" \
+      "$(cpu)" \
+      "$(memory)" \
+      "$(brightness)" \
+      "$(volume)" \
+      "$(wifi)" \
+      "$(datetime)"
+  else
+    printf "%s | %s | %s | %s %%{r} %s | %s \n" \
+      "$(temp)" \
+      "$(cpu)" \
+      "$(memory)" \
+      "$(volume)" \
+      "$(wifi)" \
+      "$(datetime)"
+  fi
 }
 
 battery() {
