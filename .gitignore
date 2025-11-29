@@ -2,5 +2,6 @@
 /tags
 /tmux/.config/tmux/plugins
 /msmtp/.config/msmtp/*.log
+/newsboat/.config/newsboat/urls
 /gpg/.gnupg/*
 !/gpg/.gnupg/gpg-agent.conf
