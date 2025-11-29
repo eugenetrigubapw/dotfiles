@@ -23,6 +23,7 @@ main() {
     stow ghostty
   fi
   if os_is_openbsd; then
+    stow ksh
     stow x
     stow feh
     stow cwm
