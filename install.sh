@@ -35,6 +35,7 @@ main() {
   stow wallpapers
   stow ssh
   stow bin
+  stow vim
   stow nvim
   stow zsh
   stow git
