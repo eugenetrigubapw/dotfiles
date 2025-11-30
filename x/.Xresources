@@ -6,7 +6,18 @@ xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
 xterm*eightBitInput: false
 xterm*allowBoldFonts: false
 
-Xft.dpi:		120
+! Desktop settings
+#ifdef SRVR_openbsd_desktop_local
+*.dpi: 196
+Xft.dpi: 196
+#endif
+
+! Laptop settings
+#ifdef SRVR_openbsd_laptop_local
+*.dpi: 96
+Xft.dpi: 96
+#endif
+
 Xft.antialias:		true
 Xft.rgba:		rgb
 Xft.hinting:		true
