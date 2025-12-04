@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/ksh
 
 if [ "$(uname)" = "OpenBSD" ]; then
   . ~/.profile
@@ -7,33 +7,29 @@ fi
 #
 # Setup Shell Prompt
 #
-# This enables a simple prompt with git info
-# and the current working directory.
-#
-autoload -Uz vcs_info
-zstyle ":vcs_info:*" enable git
-zstyle ':vcs_info:git:*' formats '%F{green}(%b)%f '
-precmd() {
-  vcs_info
+git_branch() {
+  git branch 2>/dev/null | grep '^\*' | cut -d' ' -f2-
 }
-setopt prompt_subst
-NEWLINE=$'\n'
-PROMPT=' %2~ ${vcs_info_msg_0_}%# '
 
-#
-# Setup the zsh shell completion system
-#
-# See `man zshcompsys`.
-#
-autoload -Uz compinit
-compinit
+# PS1 with git branch support
+PS1='$(
+  printf " %s " "${PWD#$HOME/}"
+  branch=$(git_branch)
+  if [ -n "$branch" ]; then
+    printf "\033[32m(%s)\033[0m " "$branch"
+  fi
+  if [ "$(id -u)" -eq 0 ]; then
+    printf "# "
+  else
+    printf "$ "
+  fi
+)'
 
 #
 # Setup shell history
 #
-export HISTFILE=~/.zhistory
+export HISTFILE=~/.ksh_history
 export HISTSIZE=1000000
-export SAVEHIST=1000000
 
 #
 # Setup default env variables
@@ -44,8 +40,9 @@ export GPG_TTY=$(tty)
 export PAGER="less"
 export MANPAGER="less"
 export BAT_THEME="tokyonight_night"
-export SRC_DIR="$HOME/src"
-export BIN_DIR="$HOME/bin"
+export LANG="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export TERM="xterm-256color"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -55,9 +52,8 @@ export XDG_STATE_HOME="$HOME/.local/state"
 #
 # Language setup
 #
-export GOPATH="$SRC_DIR/go"
-export GOBIN="$SRC_DIR/go/bin"
-export PATH="$GOBIN:$PATH"
+export GOPATH="$XDG_DATA_HOME/go"
+export GOBIN="$HOME/.local/bin"
 export GOPROXY="direct"
 
 if [ -d "$HOME/.pyenv" ]; then
@@ -72,17 +68,12 @@ fi
 
 if [ -d "$HOME/.nvm" ]; then
   export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-fi
-
-if command -v fzf > /dev/null 2>&1; then
-  eval "$(fzf --zsh)"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 fi
 
 #
 # Append additional directories onto PATH
 #
-export PATH="$BIN_DIR:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 #
@@ -129,3 +120,5 @@ alias gcb="git checkout -b"
 alias h="history 25"
 alias j="jobs -l"
 alias l="ls -al"
+
+set -o emacs

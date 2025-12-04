@@ -1,24 +1,13 @@
 # Dotfiles
 
-Configuration files and scripts for my macOS development environment.
+Configuration files and scripts for my personal systems.
 
-![Screenshot of Development Environment](./screenshots/overview.webp)
-
-## What's Included
-
-- Terminal: GhostTY
-- Shell: Zsh
-- Editor: Neovim
-- Multiplexer: Tmux with TPM for plugin management
-- Git & GPG configurations
-- Custom scripts, such as `gh-clone-all`, which makes it easy to clone GitHub
-  repositories and keep them up to date in bulk.
+![Screenshot of Development Environment](./docs/screenshots/overview.webp)
 
 ## Structure
 
 The repository uses [GNU Stow](https://www.gnu.org/software/stow/) to manage
 symlinks between these configuration files and the user's home directory.
-Homebrew packages are tracked via a Brewfile.
 
 ## Installation
 
@@ -35,18 +24,4 @@ chmod u+x install.sh
 the `$HOME` directory because GNU Stow defaults to using the parent directory
 for it's symlinking. If cloned elsewhere, the `stow` commands in `install.sh`
 would need to be updated.
-
-## Homebrew Management
-
-To update your `homebrew/Brewfile` with your currently installed Homebrew
-formulae and casks, run:
-
-```sh
-chmod u+x homebrew/sync-brewfile.sh
-./homebrew/sync-brewfile.sh
-```
-
-This script only updates the `homebrew/Brewfile` with your current manually
-installed Homebrew packages. It does not install or remove any packages.
-You can then use `git diff` to review the changes.
 

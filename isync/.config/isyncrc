@@ -1,0 +1,161 @@
+CopyArrivalDate yes
+Create Near
+Expunge Both
+
+##################
+# Gmail
+##################
+
+IMAPAccount gmail
+Host imap.gmail.com
+User eugenetriguba@gmail.com
+PassCmd "get-password --credential 'Personal Gmail Password'"
+TLSType IMAPS
+AuthMechs PLAIN
+
+MaildirStore gmail-local
+Path ~/Mail/Gmail/
+Inbox ~/Mail/Gmail/INBOX
+SubFolders Verbatim
+
+IMAPStore gmail-remote
+Account gmail
+
+Channel gmail-main
+Far :gmail-remote:
+Near :gmail-local:
+Patterns INBOX
+
+Channel gmail-sent
+Far :gmail-remote:"[Gmail]/Sent Mail"
+Near :gmail-local:Sent
+Create Both
+SyncState *
+
+Channel gmail-drafts
+Far :gmail-remote:"[Gmail]/Drafts"
+Near :gmail-local:Drafts
+Create Both
+SyncState *
+
+Channel gmail-starred
+Far :gmail-remote:"[Gmail]/Starred"
+Near :gmail-local:Starred
+Create Both
+SyncState *
+
+Channel gmail-spam
+Far :gmail-remote:"[Gmail]/Spam"
+Near :gmail-local:Spam
+Create Both
+SyncState *
+
+Channel gmail-trash
+Far :gmail-remote:"[Gmail]/Trash"
+Near :gmail-local:Trash
+Create Both
+SyncState *
+
+Channel gmail-all
+Far :gmail-remote:"[Gmail]/All Mail"
+Near :gmail-local:"All Mail"
+Create Both
+SyncState *
+
+Channel gmail-important
+Far :gmail-remote:"[Gmail]/Important"
+Near :gmail-local:Important
+Create Both
+SyncState *
+
+Channel gmail-labels
+Far :gmail-remote:
+Near :gmail-local:
+Patterns "http-wg"
+Create Both
+SyncState *
+
+# Group all Gmail channels
+Group gmail-all
+Channel gmail-main
+Channel gmail-sent
+Channel gmail-drafts
+Channel gmail-starred
+Channel gmail-spam
+Channel gmail-trash
+Channel gmail-all
+Channel gmail-important
+Channel gmail-labels
+
+##################
+# iCloud 
+##################
+
+IMAPAccount icloud
+Host imap.mail.me.com
+User eugenetriguba@gmail.com
+PassCmd "get-password --credential 'Personal iCloud Password'"
+TLSType IMAPS
+AuthMechs PLAIN
+
+MaildirStore icloud-local
+Path ~/Mail/iCloud/
+Inbox ~/Mail/iCloud/INBOX
+SubFolders Verbatim
+
+IMAPStore icloud-remote
+Account icloud
+
+Channel icloud-main
+Far :icloud-remote:
+Near :icloud-local:
+Patterns INBOX
+
+Channel icloud-sent
+Far :icloud-remote:"Sent Messages"
+Near :icloud-local:Sent
+Create Both
+SyncState *
+
+Channel icloud-drafts
+Far :icloud-remote:Drafts
+Near :icloud-local:Drafts
+Create Both
+SyncState *
+
+Channel icloud-trash
+Far :icloud-remote:"Deleted Messages"
+Near :icloud-local:Trash
+Create Both
+SyncState *
+
+Channel icloud-junk
+Far :icloud-remote:Junk
+Near :icloud-local:Spam
+Create Both
+SyncState *
+
+Channel icloud-archive
+Far :icloud-remote:Archive
+Near :icloud-local:Archive
+Create Both
+SyncState *
+
+Channel icloud-snoozed
+Far :icloud-remote:Snoozed
+Near :icloud-local:Snoozed
+Create Both
+SyncState *
+
+Group icloud-all
+Channel icloud-main
+Channel icloud-sent
+Channel icloud-drafts
+Channel icloud-trash
+Channel icloud-junk
+Channel icloud-archive
+Channel icloud-snoozed
+
+Group primary
+Channel gmail-all
+Channel icloud-all

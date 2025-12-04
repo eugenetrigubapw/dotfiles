@@ -1,0 +1,8 @@
+location:Pittsburgh
+fetch_cmd:ftp -V -o -
+units:imperial
+show_daylight:true
+show_pressure:false
+show_wind:true
+ansi:false
+symbols:true
