@@ -1,5 +1,0 @@
-require 'eugenetriguba.global'
-require 'eugenetriguba.lazy'
-require 'eugenetriguba.keymaps'
-require 'eugenetriguba.autocmds'
-require 'eugenetriguba.options'
