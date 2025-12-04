@@ -17,7 +17,7 @@
       "src": "https://github.com/saghen/blink.cmp"
     },
     "conform": {
-      "rev": "973f3cb73887d510321653044791d7937c7ec0fa",
+      "rev": "ffe26e8df8115c9665d24231f8a49fadb2d611ce",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "conform.nvim": {
@@ -41,7 +41,7 @@
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns": {
-      "rev": "ca8bf696be575efa925ef531c4efd897b5c3086b",
+      "rev": "5813e4878748805f1518cee7abb50fd7205a3a48",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "harpoon": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/kdheepak/lazygit.nvim"
     },
     "lualine": {
-      "rev": "a94fc68960665e54408fe37dcf573193c4ce82c9",
+      "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason-lspconfig.nvim": {
@@ -108,7 +108,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-web-devicons": {
-      "rev": "c2599a81ecabaae07c49ff9b45dcd032a8d90f1a",
+      "rev": "8dcb311b0c92d460fac00eac706abd43d94d68af",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "oil": {
