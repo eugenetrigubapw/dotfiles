@@ -19,7 +19,7 @@ log_success() {
 }
 
 log_debug() {
-  [ "${DEBUG:-}" == "true" ] && echo "[DEBUG] $*" >&2
+  [ "${DEBUG:-}" = "true" ] && echo "[DEBUG] $*" >&2
 }
 
 log_newline() {

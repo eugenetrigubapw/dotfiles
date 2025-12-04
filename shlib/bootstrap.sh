@@ -27,6 +27,7 @@ bootstrap_macos() {
 bootstrap_openbsd() {
   log_info "Installing OpenBSD packages..."
   _openbsd_packages="$(cat "$(dirname "$0")/openbsd/packages.txt" | tr '\n' ' ')"
+  # shellcheck disable=SC2086
   doas pkg_add $_openbsd_packages
   chsh -s /usr/local/bin/zsh "$USER"
 }
