@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+import ast
+import subprocess
+import sys
+from pathlib import Path
+from typing import override
+
+if len(sys.argv) < 2:
+    raise SystemExit("usage: django-test [--list] <func_name>")
+
+list_only = sys.argv[1] == "--list"
+func_name = sys.argv[2] if list_only else sys.argv[1]
+
+repo_root = Path(subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip())
+files = subprocess.check_output(["git", "ls-files", "*.py"], text=True, cwd=repo_root).splitlines()
+hits: list[str] = []
+
+for rel_path in files:
+    path = repo_root / rel_path
+    s = path.read_text(encoding="utf-8")
+
+    if func_name not in s:
+        continue
+    t = ast.parse(s, filename=str(rel_path))
+    mod = rel_path[:-3].replace("/", ".").replace("\\", ".")
+
+    class V(ast.NodeVisitor):
+        cls: str | None = None
+
+        @override
+        def visit_ClassDef(self, node: ast.ClassDef) -> None:
+            old = self.cls
+            self.cls = node.name
+            self.generic_visit(node)
+            self.cls = old
+
+        @override
+        def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+            if node.name == func_name:
+                hits.append(f"{sys.executable} manage.py test {mod}.{self.cls+'.' if self.cls else ''}{func_name}")
+            self.generic_visit(node)
+
+    V().visit(t)
+
+hits = sorted(set(hits))
+
+if list_only or len(hits) != 1:
+    [print(h) for h in hits]
+else:
+    cmd = hits[0]
+    print(cmd)
+    _ = subprocess.run(cmd, shell=True, check=True, cwd=repo_root)

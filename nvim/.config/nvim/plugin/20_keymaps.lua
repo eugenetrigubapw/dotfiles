@@ -22,3 +22,23 @@ map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+map('n', '<leader>rdt', function()
+  local func_name = vim.fn.expand '<cword>'
+  local output = vim.fn.systemlist('django-test --list ' .. func_name)
+  if #output == 0 then
+    vim.notify('No tests found for: ' .. func_name, vim.log.levels.WARN)
+  elseif #output == 1 then
+    -- Single match, run directly
+    vim.cmd('split | terminal ' .. output[1])
+  else
+    -- Multiple matches, prompt user
+    vim.ui.select(output, {
+      prompt = 'Select test to run:',
+    }, function(choice)
+      if choice then
+        vim.cmd('split | terminal ' .. choice)
+      end
+    end)
+  end
+end, { desc = '[R]un [D]jango [T]est for word under cursor' })
