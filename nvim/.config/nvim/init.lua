@@ -1,3 +1,154 @@
+-- Set <space> as the leader key
+-- See `:help mapleader`
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+local opt = vim.opt
+
+-- Make line numbers default
+opt.number = true
+
+-- Use relative line numbers, to help with jumping.
+opt.relativenumber = true
+
+-- In Insert mode, replace <Tab> with the appropriate
+-- number of spaces.
+opt.expandtab = true
+
+-- When starting a new line, use smart indentation to
+-- figure out what indentation the new line should be
+-- at.
+opt.autoindent = true
+opt.smartindent = true
+
+-- Number of spaces to use for each step of autoindentation.
+opt.shiftwidth = 2
+
+-- Number of spaces to use when using <Tab>.
+opt.tabstop = 2
+
+-- Case-insensitive searching UNLESS \C or one
+-- or more capital letters in the search term
+opt.ignorecase = true
+opt.smartcase = true
+
+-- Explicitly enable 24-bit RGB colors in the terminal.
+-- Neovim will normally automatically attempt to enable
+-- this if it detects the terminal can support it.
+opt.termguicolors = true
+
+-- Keep signcolumn on by default
+opt.signcolumn = 'yes'
+
+-- Show which line your cursor is on
+opt.cursorline = true
+
+-- If performing an operation that would fail due to unsaved
+-- changes in the buffer (like `:q`), instead raise a dialog
+-- asking if you wish to save the current file(s)
+--
+-- See `:help 'confirm'`
+opt.confirm = true
+
+-- Save undo history
+opt.undofile = true
+
+-- Minimal number of screen lines to keep above and below the cursor.
+opt.scrolloff = 10
+
+-- Enable mouse mode e.g. can be useful for resizing splits
+opt.mouse = 'a'
+
+-- Don't show the mode, since it's already in the status line
+opt.showmode = false
+
+-- Sync clipboard between OS and Neovim.
+--
+-- Schedule the setting after `UiEnter` because it can increase
+-- startup-time. Remove this option to keep the OS clipboard
+-- independent from neovim.
+--
+-- See `:help 'clipboard'`
+vim.schedule(function()
+  opt.clipboard = 'unnamedplus'
+end)
+
+-- Continue to visually indent wrapped lines
+-- to preserve horizontal blocks of text
+opt.breakindent = true
+
+-- Decrease update time
+opt.updatetime = 250
+
+-- Decrease mapped sequence wait time
+opt.timeoutlen = 300
+
+-- Configure how new splits should be opened
+opt.splitright = true
+opt.splitbelow = true
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+-- See `:help 'list'` and `:help 'listchars'`
+opt.list = true
+opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Preview substitutions live, as you type!
+opt.inccommand = 'split'
+
+local map = vim.keymap.set
+
+-- Create split panes using leader key
+map('n', '<leader>sh', ':split<CR>')
+map('n', '<leader>sv', ':vsplit<CR>')
+
+-- Clear highlights on search when pressing <Esc> in normal mode
+map('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Diagnostic keymaps
+map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+-- to remember.
+map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Keybinds to make split navigation easier.
+-- Use CTRL+<hjkl> to switch between windows
+--
+--  See `:help wincmd` for a list of all window commands
+map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+map('n', '<leader>rdt', function()
+  local func_name = vim.fn.expand '<cword>'
+  local output = vim.fn.systemlist('django-test --list ' .. func_name)
+  if #output == 0 then
+    vim.notify('No tests found for: ' .. func_name, vim.log.levels.WARN)
+  elseif #output == 1 then
+    -- Single match, run directly
+    vim.cmd('split | terminal ' .. output[1])
+  else
+    -- Multiple matches, prompt user
+    vim.ui.select(output, {
+      prompt = 'Select test to run:',
+    }, function(choice)
+      if choice then
+        vim.cmd('split | terminal ' .. choice)
+      end
+    end)
+  end
+end, { desc = '[R]un [D]jango [T]est for word under cursor' })
+
+-- Highlight when yanking (copying) text
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
 vim.pack.add {
   {
     name = 'tokyonight',
@@ -9,7 +160,7 @@ require('tokyonight').setup {
     comments = { italic = false },
   },
 }
-vim.cmd.colorscheme 'tokyonight-night'
+vim.cmd.colorscheme 'tokyonight'
 
 vim.pack.add {
   {
@@ -661,6 +812,7 @@ local servers = {
       python = {
         analysis = {
           autoImportCompletions = true,
+          typeCheckingMode = 'basic',
         },
       },
     },
