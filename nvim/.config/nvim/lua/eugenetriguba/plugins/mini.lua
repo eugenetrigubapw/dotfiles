@@ -73,9 +73,9 @@ require('mini.diff').setup()
 vim.keymap.set('n', '<leader>ho', function()
   require('mini.diff').toggle_overlay(0)
 end, { desc = 'git [o]verlay hunk diff' })
-vim.keymap.set('n', '<leader>hs', function()
+vim.keymap.set('n', '<leader>ht', function()
   require('mini.diff').toggle_overlay(0)
-end, { desc = '[H]unk [S]tage (toggle overlay)' })
+end, { desc = '[H]unk [T]oggle overlay' })
 vim.keymap.set('n', ']c', function()
   if vim.wo.diff then
     vim.cmd.normal { ']c', bang = true }
