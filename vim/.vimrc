@@ -6,10 +6,11 @@ set nocompatible
 " to the current line the cursor is on.
 set relativenumber
 
-" Enable filetype detection to apply filetype-specific
-" settings e.g. syntax highlighting and enable filetype
-" plugins.
-filetype plugin on
+" 1. Enable filetype detection to apply filetype-specific
+" settings e.g. syntax highlighting
+" 2. Enable filetype plugins.
+" 3. Enable the indent plugin for automatic indentation
+filetype plugin indent on
 
 " Turn on syntax highlighting
 syntax on
