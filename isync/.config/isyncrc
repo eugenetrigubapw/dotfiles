@@ -141,20 +141,29 @@ Near :icloud-local:Archive
 Create Both
 SyncState *
 
-Channel icloud-snoozed
-Far :icloud-remote:Snoozed
-Near :icloud-local:Snoozed
+Channel icloud-openbsd
+Far :icloud-remote:
+Near :icloud-local:
+Patterns "OpenBSD/*"
+Create Both
+SyncState *
+
+Channel icloud-sourcehut
+Far :icloud-remote:
+Near :icloud-local:
+Patterns "SourceHut/*"
 Create Both
 SyncState *
 
 Group icloud-all
 Channel icloud-main
+Channel icloud-sourcehut
+Channel icloud-openbsd
 Channel icloud-sent
 Channel icloud-drafts
 Channel icloud-trash
 Channel icloud-junk
 Channel icloud-archive
-Channel icloud-snoozed
 
 Group primary
 Channel gmail-all
