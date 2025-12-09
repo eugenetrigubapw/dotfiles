@@ -2,6 +2,7 @@ vim.pack.add {
   {
     name = 'blink.cmp',
     src = 'https://github.com/saghen/blink.cmp',
+    version = 'v1.8.0',
   },
   {
     name = 'LuaSnip',

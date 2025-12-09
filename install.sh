@@ -21,6 +21,7 @@ main() {
 
   if os_is_macos; then
     stow ghostty
+    stow macos-gpg
   fi
   if os_is_openbsd; then
     stow ksh
@@ -31,6 +32,7 @@ main() {
     stow lemonbar-xft
     stow newsboat
     stow ansiweather
+    stow gpg
   fi
   stow wallpapers
   # stow ssh
@@ -39,7 +41,6 @@ main() {
   stow nvim
   stow zsh
   stow git
-  stow gpg
   stow tmux
   stow aerc
   stow isync

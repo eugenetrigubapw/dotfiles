@@ -15,7 +15,6 @@ account        icloud
 host           smtp.mail.me.com
 port           587
 from           hello@eugenetriguba.com
-#user           eugenetriguba@gmail.com
 user           eugenetriguba@icloud.com
 passwordeval   get-password --credential 'Personal iCloud Password'
 set_from_header on

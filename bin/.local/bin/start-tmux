@@ -1,5 +1,12 @@
 #!/bin/sh
-set -e
 
-tmux new-session -A -s "$USER" -d
-exec tmux attach-session -t "$USER" || true
+readonly SESSION_NAME="$USER"
+
+main() {
+	if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+		tmux new-session -A -s "$SESSION_NAME" -d
+	fi
+	exec tmux attach-session -t "$SESSION_NAME"
+}
+
+main
