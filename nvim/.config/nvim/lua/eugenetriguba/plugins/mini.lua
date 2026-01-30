@@ -107,3 +107,8 @@ end, { desc = 'git [s]how range history' })
 vim.keymap.set('n', '<leader>gl', function()
   require('mini.git').show_range_history { show_level = 'buffer' }
 end, { desc = 'git [l]og' })
+
+require('mini.files').setup()
+vim.keymap.set('n', '<Leader>fm', function()
+  require('mini.files').open()
+end, { desc = 'Open mini.files' })

@@ -1,5 +1,5 @@
 # Plugin manager
-set-environment -g TMUX_PLUGIN_MANAGER_PATH "$HOME/.config/tmux/plugins/"
+set-environment -g TMUX_PLUGIN_MANAGER_PATH "$HOME/.config/tmux/plugins"
 set-option -g @plugin 'tmux-plugins/tpm'
 
 # 'Sensible' set of defaults

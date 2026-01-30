@@ -5,6 +5,11 @@ vim.pack.add {
   },
 }
 require('fzf-lua').setup {
+  keymap = {
+    fzf = {
+      ['ctrl-q'] = 'select-all+accept',
+    },
+  },
   winopts = {
     preview = {
       default = 'bat',

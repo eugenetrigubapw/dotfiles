@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 require('treesitter-context').setup {
-  multiline_threshold = 10,
+  multiline_threshold = 5,
 }
 
 vim.api.nvim_create_autocmd('PackChanged', {

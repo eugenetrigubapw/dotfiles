@@ -7,6 +7,10 @@ map('n', '<leader>sv', ':vsplit<CR>')
 -- Clear highlights on search when pressing <Esc> in normal mode
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- Use tab and shift-tab to navigate buffers
+map('n', '<Tab>', '<cmd>bnext<CR>', { noremap = true, silent = true })
+map('n', '<S-Tab>', '<cmd>bprevious<CR>', { noremap = true, silent = true })
+
 -- Diagnostic keymaps
 map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 

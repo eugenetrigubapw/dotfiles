@@ -38,8 +38,8 @@ export SAVEHIST=1000000
 #
 # Setup default env variables
 #
+export TERM="xterm-256color"
 export EDITOR="nvim"
-export BROWSER="firefox"
 export GPG_TTY=$(tty)
 export PAGER="less"
 export MANPAGER="less"
@@ -133,3 +133,10 @@ alias j="jobs -l"
 alias l="ls -al"
 
 alias tf="terraform"
+
+kubectl_auth() {
+    if ! aws sso login --profile pw-shared-services; then
+        exit 1
+    fi
+    aws eks update-kubeconfig --region us-east-1 --name github-action-runners-cluster --profile pw-shared-services
+}
