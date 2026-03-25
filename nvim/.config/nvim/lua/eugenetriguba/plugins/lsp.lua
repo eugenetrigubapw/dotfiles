@@ -119,6 +119,7 @@ local servers = {
   clangd = {},
   gopls = {},
   ty = {},
+  -- pyright = {},
   yamlls = {},
   rust_analyzer = {},
   ts_ls = {},
